@@ -88,14 +88,8 @@ const blogLd = {
         ship indie iOS apps like <a href="https://apps.apple.com/us/app/hidgets/id1533426260" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">Hidgets</a> and <a href="https://apps.apple.com/us/app/duetcam/id1481323447" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">DuetCam</a>,
         and write here about agentic development, security, and the craft.
       </p>
-      <p
-        class="mt-6 text-base sm:text-lg leading-none tracking-wide select-none"
-        title="Brazilian, German, Portuguese"
-        aria-label="Brazilian, German, and Portuguese heritage"
-      >
-        <span aria-hidden="true">🇧🇷</span>
-        <span aria-hidden="true">🇩🇪</span>
-        <span aria-hidden="true">🇵🇹</span>
+      <p class="mt-6 text-base sm:text-lg leading-none tracking-wide select-none" title="Brazilian, German, Portuguese">
+        <span role="img" aria-label="Brazilian, German, and Portuguese heritage">🇧🇷🇩🇪🇵🇹</span>
       </p>
     </div>
   </section>
@@ -114,7 +108,6 @@ const blogLd = {
           <a
             href={`/posts/${post.id}/`}
             class="group block py-5 sm:py-6 transition-colors"
-            aria-label={`${post.data.title}, published ${post.data.publishDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
           >
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-6">
               <time
