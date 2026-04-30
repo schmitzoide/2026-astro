@@ -1,4 +1,4 @@
-export const WP_API = "https://marcelschmitz.com/wp-json/wp/v2";
+export const WP_API = "https://kitchen.marcelschmitz.com/wp-json/wp/v2";
 
 const entities: Record<string, string> = {
   "&amp;": "&",

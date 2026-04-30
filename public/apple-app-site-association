@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["75YAH8STA9.com.schmitzoide.BetterSiri"],
+        "paths": [ "/app*", "/app", "/app/*" ]
+      }
+    ]
+  },
+  "appclips": {
+    "apps": ["75YAH8STA9.com.schmitzoide.BetterSiri.Clip"]
+  }
+}
