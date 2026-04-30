@@ -1,0 +1,161 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { formatDateMono } from "../lib/format";
+import { SITE } from "../lib/site";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+
+const categoryLabel: Record<string, string> = {
+  "software-development": "software",
+  "hacking": "security",
+  "phishing": "security",
+  "life-event": "personal",
+  "wordpress-development": "wordpress",
+};
+
+const yearsBuilding = new Date().getFullYear() - 1998;
+
+const homepageTitle = "Marcel Schmitz — software engineer in Porto, writing on agentic dev, security, and the craft";
+const homepageDescription = `Marcel Schmitz writes about agentic development, social engineering and AI security, and ${yearsBuilding}+ years of building software. Based in Porto, founder of Pluginslab.`;
+
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.author,
+  url: SITE.url,
+  jobTitle: SITE.jobTitle,
+  worksFor: { "@type": "Organization", name: SITE.worksFor.name, url: SITE.worksFor.url },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: SITE.location.city,
+    addressCountry: SITE.location.country,
+  },
+  email: `mailto:${SITE.email}`,
+  sameAs: SITE.sameAs,
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.name,
+  url: SITE.url,
+  inLanguage: SITE.locale,
+  description: homepageDescription,
+  author: { "@type": "Person", name: SITE.author, url: SITE.url },
+};
+
+const blogLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: `${SITE.name} — Writing`,
+  url: SITE.url,
+  inLanguage: SITE.locale,
+  author: { "@type": "Person", name: SITE.author, url: SITE.url },
+  blogPost: posts.map((post) => ({
+    "@type": "BlogPosting",
+    headline: post.data.title,
+    description: post.data.description,
+    url: new URL(`/posts/${post.id}/`, SITE.url).toString(),
+    datePublished: post.data.publishDate.toISOString(),
+    dateModified: post.data.updatedDate.toISOString(),
+    author: { "@type": "Person", name: SITE.author, url: SITE.url },
+    keywords: post.data.tags.join(", "),
+    articleSection: post.data.categoryName,
+  })),
+};
+---
+
+<Base title={homepageTitle} description={homepageDescription}>
+  <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(blogLd)} />
+
+  <section class="mx-auto max-w-5xl px-6 lg:px-10 pt-16 sm:pt-24 pb-20" aria-labelledby="hero-name">
+    <div class="max-w-3xl">
+      <p class="font-mono text-[12px] tracking-wider uppercase text-[color:var(--fg-soft)] mb-6">
+        <span class="inline-block w-1.5 h-1.5 bg-[color:var(--accent)] rounded-full align-middle mr-2" aria-hidden="true"></span>
+        Porto, Portugal · {yearsBuilding} years building software
+      </p>
+      <h1 id="hero-name" class="font-serif text-[clamp(2.5rem,6vw,5rem)] leading-[1.02] tracking-[-0.02em] font-light">
+        Marcel <span style="font-style: italic; font-variation-settings: 'opsz' 144;">Schmitz</span>
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-[color:var(--fg-soft)] leading-relaxed max-w-2xl">
+        Software engineer specialising in WordPress, WooCommerce, and native iOS.
+        I run <a href="https://pluginslab.com" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" rel="me">Pluginslab</a>,
+        ship indie iOS apps like <a href="https://apps.apple.com/us/app/hidgets/id1533426260" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">Hidgets</a> and <a href="https://apps.apple.com/us/app/duetcam/id1481323447" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">DuetCam</a>,
+        and write here about agentic development, security, and the craft.
+      </p>
+      <p
+        class="mt-6 text-base sm:text-lg leading-none tracking-wide select-none"
+        title="Brazilian, German, Portuguese"
+        aria-label="Brazilian, German, and Portuguese heritage"
+      >
+        <span aria-hidden="true">🇧🇷</span>
+        <span aria-hidden="true">🇩🇪</span>
+        <span aria-hidden="true">🇵🇹</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 lg:px-10 pb-24" aria-labelledby="writing-heading">
+    <div class="flex items-baseline justify-between mb-10 pb-4 border-b border-[color:var(--rule)]">
+      <h2 id="writing-heading" class="font-serif text-2xl tracking-tight">Writing</h2>
+      <span class="font-mono text-[12px] text-[color:var(--fg-soft)]" aria-hidden="true">
+        {posts.length} {posts.length === 1 ? "essay" : "essays"}
+      </span>
+    </div>
+
+    <ul class="divide-y divide-[color:var(--rule)]" role="list">
+      {posts.map((post) => (
+        <li>
+          <a
+            href={`/posts/${post.id}/`}
+            class="group block py-5 sm:py-6 transition-colors"
+            aria-label={`${post.data.title} — published ${post.data.publishDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
+          >
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-6">
+              <time
+                datetime={post.data.publishDate.toISOString()}
+                class="font-mono text-[11px] text-[color:var(--fg-soft)] sm:w-[100px] shrink-0 tabular-nums"
+              >
+                {formatDateMono(post.data.publishDate)}
+              </time>
+              <div class="flex-1 mt-1 sm:mt-0 min-w-0">
+                <h3 class="font-serif text-xl sm:text-2xl leading-snug tracking-tight font-medium group-hover:text-[color:var(--accent)] transition-colors">
+                  {post.data.title}
+                </h3>
+                <p class="mt-2 text-[15px] text-[color:var(--fg-soft)] leading-relaxed line-clamp-2">
+                  {post.data.description}
+                </p>
+                <p class="mt-3 font-mono text-[11px] text-[color:var(--fg-soft)]">
+                  <span class="text-[color:var(--accent)]">/{categoryLabel[post.data.category] ?? post.data.category}</span>
+                </p>
+              </div>
+              <span class="hidden sm:inline-block self-center font-mono text-[color:var(--fg-soft)] group-hover:text-[color:var(--accent)] group-hover:translate-x-0.5 transition-all" aria-hidden="true">→</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 lg:px-10 pb-12" aria-label="Quick facts">
+    <div class="border-t border-[color:var(--rule)] pt-10 grid sm:grid-cols-3 gap-8">
+      <div>
+        <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Currently</h2>
+        <p class="text-[15px] leading-relaxed">Running <a href="https://pluginslab.com" class="underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)]">Pluginslab</a>, taking selective freelance via Codeable, and shipping side projects.</p>
+      </div>
+      <div>
+        <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Going next</h2>
+        <p class="text-[15px] leading-relaxed">WordCamp Europe · Swift Island · performance.now() — see <a href="/up-next/" class="underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)]">Up Next</a>.</p>
+      </div>
+      <div>
+        <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Get in touch</h2>
+        <p class="text-[15px] leading-relaxed"><a href={`mailto:${SITE.email}`} class="underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)]">{SITE.email}</a>. Usually replies within a day.</p>
+      </div>
+    </div>
+  </section>
+</Base>

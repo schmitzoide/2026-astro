@@ -1,0 +1,18 @@
+---
+import Base from "../layouts/Base.astro";
+import { getEntry } from "astro:content";
+
+const page = await getEntry("pages", "about-me");
+if (!page) throw new Error("about-me page not found in WordPress");
+const { data } = page;
+---
+
+<Base title={data.title} description={data.description}>
+  <article class="mx-auto max-w-3xl px-6 lg:px-10 pt-16 sm:pt-24 pb-20">
+    <p class="font-mono text-[12px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-6">About</p>
+    <h1 class="font-serif text-4xl sm:text-5xl tracking-tight leading-tight font-light">
+      {data.title}
+    </h1>
+    <div class="prose-reader mt-10" set:html={data.contentHtml} />
+  </article>
+</Base>

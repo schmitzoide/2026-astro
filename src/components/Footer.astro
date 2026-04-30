@@ -1,0 +1,24 @@
+---
+import { SITE } from "../lib/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 sm:mt-24 border-t border-[color:var(--rule)]">
+  <div class="mx-auto max-w-5xl px-6 lg:px-10 py-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+    <div>
+      <p class="font-serif text-2xl tracking-tight">Marcel Schmitz</p>
+      <p class="mt-1 text-sm text-[color:var(--fg-soft)]">Porto, Portugal · est. 1998</p>
+    </div>
+    <div class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[13px] text-[color:var(--fg-soft)]">
+      {SITE.social.map((s) => (
+        <a href={s.href} class="hover:text-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">
+          {s.label} <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+      <a href="/rss.xml" class="hover:text-[color:var(--accent)] transition-colors">RSS</a>
+    </div>
+  </div>
+  <div class="mx-auto max-w-5xl px-6 lg:px-10 pb-8 font-mono text-[11px] text-[color:var(--fg-soft)]">
+    © {year} · Built with Astro, managed with WordPress · No trackers, no popups, no cookies, no nonsense.
+  </div>
+</footer>
