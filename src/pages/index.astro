@@ -18,7 +18,7 @@ const categoryLabel: Record<string, string> = {
 
 const yearsBuilding = new Date().getFullYear() - 1998;
 
-const homepageTitle = "Marcel Schmitz — software engineer in Porto, writing on agentic dev, security, and the craft";
+const homepageTitle = "Marcel Schmitz, software engineer in Porto, writing on agentic dev, security, and the craft";
 const homepageDescription = `Marcel Schmitz writes about agentic development, social engineering and AI security, and ${yearsBuilding}+ years of building software. Based in Porto, founder of Pluginslab.`;
 
 const personLd = {
@@ -50,7 +50,7 @@ const websiteLd = {
 const blogLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  name: `${SITE.name} — Writing`,
+  name: `${SITE.name}, Writing`,
   url: SITE.url,
   inLanguage: SITE.locale,
   author: { "@type": "Person", name: SITE.author, url: SITE.url },
@@ -114,7 +114,7 @@ const blogLd = {
           <a
             href={`/posts/${post.id}/`}
             class="group block py-5 sm:py-6 transition-colors"
-            aria-label={`${post.data.title} — published ${post.data.publishDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
+            aria-label={`${post.data.title}, published ${post.data.publishDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`}
           >
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-6">
               <time
@@ -150,7 +150,7 @@ const blogLd = {
       </div>
       <div>
         <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Going next</h2>
-        <p class="text-[15px] leading-relaxed">WordCamp Europe · Swift Island · performance.now() — see <a href="/up-next/" class="underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)]">Up Next</a>.</p>
+        <p class="text-[15px] leading-relaxed">WordCamp Portugal (speaker) · WordCamp Europe · performance.now(). See <a href="/up-next/" class="underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)]">Up Next</a>.</p>
       </div>
       <div>
         <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Get in touch</h2>

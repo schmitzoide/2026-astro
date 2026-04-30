@@ -9,7 +9,7 @@ export const GET: APIRoute = async () => {
   const png = await generateOpenGraphImage({
     title: SITE.name,
     description:
-      "Software engineer · Porto, Portugal — Writing on agentic dev, security, and the craft.",
+      "Software engineer in Porto, Portugal. Writing on agentic dev, security, and the craft.",
     bgGradient: [[251, 250, 247]],
     border: { color: [194, 65, 12], width: 12, side: "block-start" },
     padding: 80,
