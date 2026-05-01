@@ -74,23 +74,35 @@ const blogLd = {
   <script type="application/ld+json" set:html={JSON.stringify(blogLd)} />
 
   <section class="mx-auto max-w-5xl px-6 lg:px-10 pt-16 sm:pt-24 pb-20" aria-labelledby="hero-name">
-    <div class="max-w-3xl">
-      <p class="font-mono text-[12px] tracking-wider uppercase text-[color:var(--fg-soft)] mb-6">
-        <span class="inline-block w-1.5 h-1.5 bg-[color:var(--accent)] rounded-full align-middle mr-2" aria-hidden="true"></span>
-        Porto, Portugal · {yearsBuilding} years building software
-      </p>
-      <h1 id="hero-name" class="font-serif text-[clamp(2.5rem,6vw,5rem)] leading-[1.02] tracking-[-0.02em] font-light">
-        Marcel <span style="font-style: italic; font-variation-settings: 'opsz' 144;">Schmitz</span>
-      </h1>
-      <p class="mt-6 text-lg sm:text-xl text-[color:var(--fg-soft)] leading-relaxed max-w-2xl">
-        Software engineer specialising in WordPress, WooCommerce, and native iOS.
-        I run <a href="https://pluginslab.com" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener me">Pluginslab</a>,
-        ship indie iOS apps like <a href="https://apps.apple.com/us/app/hidgets/id1533426260" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">Hidgets</a> and <a href="https://apps.apple.com/us/app/duetcam/id1481323447" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">DuetCam</a>,
-        and write here about agentic development, security, and the craft.
-      </p>
-      <p class="mt-6 text-base sm:text-lg leading-none tracking-wide select-none" title="Brazilian, German, Portuguese">
-        <span role="img" aria-label="Brazilian, German, and Portuguese heritage">🇧🇷🇩🇪🇵🇹</span>
-      </p>
+    <div class="grid gap-10 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
+      <div class="max-w-3xl order-2 lg:order-1">
+        <p class="font-mono text-[12px] tracking-wider uppercase text-[color:var(--fg-soft)] mb-6">
+          <span class="inline-block w-1.5 h-1.5 bg-[color:var(--accent)] rounded-full align-middle mr-2" aria-hidden="true"></span>
+          Porto, Portugal · {yearsBuilding} years building software
+        </p>
+        <h1 id="hero-name" class="font-serif text-[clamp(2.5rem,6vw,5rem)] leading-[1.02] tracking-[-0.02em] font-light">
+          Marcel <span style="font-style: italic; font-variation-settings: 'opsz' 144;">Schmitz</span>
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-[color:var(--fg-soft)] leading-relaxed max-w-2xl">
+          Software engineer specialising in WordPress, WooCommerce, and native iOS.
+          I run <a href="https://pluginslab.com" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener me">Pluginslab</a>,
+          ship indie iOS apps like <a href="https://apps.apple.com/us/app/hidgets/id1533426260" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">Hidgets</a> and <a href="https://apps.apple.com/us/app/duetcam/id1481323447" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors" target="_blank" rel="noopener">DuetCam</a>,
+          and write here about agentic development, security, and the craft.
+        </p>
+        <p class="mt-6 text-base sm:text-lg leading-none tracking-wide select-none" title="Brazilian, German, Portuguese">
+          <span role="img" aria-label="Brazilian, German, and Portuguese heritage">🇧🇷🇩🇪🇵🇹</span>
+        </p>
+      </div>
+      <img
+        src="https://kitchen.marcelschmitz.com/wp-content/uploads/2023/03/IMG_6846.JPG.jpg"
+        alt="Marcel Schmitz"
+        width="1755"
+        height="2048"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="order-1 lg:order-2 w-40 sm:w-56 lg:w-64 h-auto rounded-md object-cover shadow-sm"
+      />
     </div>
   </section>
 
