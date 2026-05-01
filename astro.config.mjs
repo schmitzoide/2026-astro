@@ -7,6 +7,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://marcelschmitz.com",
   integrations: [mdx(), sitemap()],
+  build: {
+    inlineStylesheets: "always",
+  },
   vite: {
     plugins: [tailwindcss()],
   },
