@@ -24,6 +24,7 @@ const next = all[idx - 1];
 
 const minutes = Math.max(1, Math.round(data.wordCount / 220));
 const url = new URL(`/posts/${post.id}/`, SITE.url).toString();
+const ogImage = new URL(`/posts/${post.id}/og.png`, SITE.url).toString();
 
 const articleLd = {
   "@context": "https://schema.org",
@@ -64,6 +65,7 @@ const breadcrumbsLd = {
 <Base
   title={data.title}
   description={data.description}
+  ogImage={ogImage}
   article={{
     publishedTime: data.publishDate.toISOString(),
     modifiedTime: data.updatedDate.toISOString(),
