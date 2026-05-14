@@ -24,7 +24,7 @@ const next = all[idx - 1];
 
 const minutes = Math.max(1, Math.round(data.wordCount / 220));
 const url = new URL(`/posts/${post.id}/`, SITE.url).toString();
-const ogImage = new URL(`/posts/${post.id}/og.png`, SITE.url).toString();
+const ogImage = data.featuredImage ?? new URL(`/posts/${post.id}/og.png`, SITE.url).toString();
 
 const articleLd = {
   "@context": "https://schema.org",

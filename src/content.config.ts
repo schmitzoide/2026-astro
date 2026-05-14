@@ -64,6 +64,7 @@ const posts = defineCollection({
     ) satisfies z.ZodType<Heading[]>,
     wordCount: z.number(),
     draft: z.boolean().default(false),
+    featuredImage: z.string().optional(),
   }),
 });
 

@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.1.0] — 2026-05-14
+
+### Added
+
+- **Featured image as OG image fallback** on post pages. `fetchPosts()` now reads `_embedded["wp:featuredmedia"][0].source_url` from the WP REST response, the loader exposes it as an optional `featuredImage` field on the post collection, and `src/pages/posts/[...slug].astro` prefers it over the Satori-rendered brand card when present. Posts without a featured image continue to use the brand-locked Satori OG.
+
 ## [1.0.0] — 2026-05-12
 
 First tagged release. Retroactively captures the post-launch consolidation since the 2026-astro greenfield: performance hardening, accessibility/SEO polish, the headless-WordPress wire, and the new analytics integration. Live at `https://marcelschmitz.com` on Ploi (prod3).

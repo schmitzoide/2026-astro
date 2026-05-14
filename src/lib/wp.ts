@@ -114,6 +114,7 @@ interface WpPostRaw {
   content: { rendered: string };
   _embedded?: {
     "wp:term"?: WpTerm[][];
+    "wp:featuredmedia"?: Array<{ source_url?: string }>;
     author?: Array<{ name: string }>;
   };
 }
@@ -131,6 +132,7 @@ export interface LoadedPost {
   headings: Heading[];
   wordCount: number;
   draft: boolean;
+  featuredImage?: string;
 }
 
 export interface LoadedPage {
@@ -184,6 +186,8 @@ export async function fetchPosts(): Promise<LoadedPost[]> {
     const plain = stripHtml(p.content.rendered);
     const description = stripHtml(p.excerpt.rendered).replace(/\s+…\s*$/, "…");
 
+    const featuredImage = p._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+
     return {
       id: p.slug,
       title: decodeEntities(p.title.rendered),
@@ -197,6 +201,7 @@ export async function fetchPosts(): Promise<LoadedPost[]> {
       headings,
       wordCount: plain.split(/\s+/).filter(Boolean).length,
       draft: false,
+      featuredImage,
     };
   });
 }
