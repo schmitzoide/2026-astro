@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.2.1] — 2026-05-19
+
+### Fixed
+
+- **Favicon swapped from Astro's default rocket to a brand mark.** New `public/favicon.svg` is a teal (`#0C314B`) rounded square with a white `~/` glyph (tilde + slash), echoing the site header's `~/marcel.schmitz` identity. Hand-drawn paths so it renders crisply at 16×16. Added `favicon-32.png` and `apple-touch-icon.png` (180×180) for legacy browsers and iOS home-screen, rasterized via `sips`. `Base.astro` now ships the full link-rel set (svg primary, png 32×32 fallback, apple-touch-icon, shortcut icon) plus a `<meta name="theme-color" content="#0C314B">` for mobile browser chrome.
+
 ## [1.2.0] — 2026-05-18
 
 ### Added
