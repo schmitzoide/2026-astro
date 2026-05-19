@@ -20,8 +20,8 @@ const categoryLabel: Record<string, string> = {
 
 const yearsBuilding = new Date().getFullYear() - 1998;
 
-const homepageTitle = "Marcel Schmitz, software engineer in Porto, writing on agentic dev, security, and the craft";
-const homepageDescription = `Marcel Schmitz writes about agentic development, social engineering and AI security, and ${yearsBuilding}+ years of building software. Based in Porto, founder of Pluginslab.`;
+const homepageSeoTitle = "Marcel Schmitz, software engineer in Porto";
+const homepageDescription = `Marcel Schmitz writes on agentic development, AI security, and ${yearsBuilding}+ years of building software. Porto-based, founder of Pluginslab.`;
 
 const personLd = {
   "@context": "https://schema.org",
@@ -70,7 +70,7 @@ const blogLd = {
 };
 ---
 
-<Base title={homepageTitle} description={homepageDescription}>
+<Base seoTitle={homepageSeoTitle} description={homepageDescription}>
   <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(blogLd)} />

@@ -123,6 +123,8 @@ export interface LoadedPost {
   id: string;
   title: string;
   description: string;
+  seoTitle: string;
+  seoDescription: string;
   publishDate: string;
   updatedDate: string;
   category: string;
@@ -139,8 +141,40 @@ export interface LoadedPage {
   id: string;
   title: string;
   description: string;
+  seoTitle: string;
+  seoDescription: string;
   updatedDate: string;
   contentHtml: string;
+}
+
+const SEO_TITLE_MAX = 60;
+const SEO_DESC_MAX = 160;
+const SEO_BRAND_SUFFIX = " · Marcel Schmitz";
+
+function truncateAtWord(str: string, max: number): string {
+  if (str.length <= max) return str;
+  const cut = str.slice(0, max);
+  const stripped = cut.replace(/\s+\S*$/, "");
+  return stripped.length > 0 ? stripped : cut;
+}
+
+export function deriveSeoTitle(title: string): string {
+  if (/Marcel Schmitz/i.test(title)) {
+    return title.length <= SEO_TITLE_MAX
+      ? title
+      : truncateAtWord(title, SEO_TITLE_MAX);
+  }
+  const room = SEO_TITLE_MAX - SEO_BRAND_SUFFIX.length;
+  const colonIdx = title.indexOf(":");
+  let lead =
+    colonIdx > 10 && colonIdx <= room ? title.slice(0, colonIdx) : title;
+  lead = truncateAtWord(lead, room);
+  return `${lead}${SEO_BRAND_SUFFIX}`;
+}
+
+export function deriveSeoDescription(desc: string): string {
+  if (desc.length <= SEO_DESC_MAX) return desc;
+  return `${truncateAtWord(desc, SEO_DESC_MAX - 1)}…`;
 }
 
 interface WpPageRaw {
@@ -157,13 +191,19 @@ export async function fetchPages(): Promise<LoadedPage[]> {
   if (!res.ok) throw new Error(`WP pages fetch failed: ${res.status} ${res.statusText}`);
   const raw = (await res.json()) as WpPageRaw[];
 
-  return raw.map((p) => ({
-    id: p.slug,
-    title: decodeEntities(p.title.rendered),
-    description: stripHtml(p.excerpt.rendered).replace(/\s+…\s*$/, "…"),
-    updatedDate: p.modified,
-    contentHtml: injectHeadingIds(fixLazyImages(p.content.rendered)),
-  }));
+  return raw.map((p) => {
+    const title = decodeEntities(p.title.rendered);
+    const description = stripHtml(p.excerpt.rendered).replace(/\s+…\s*$/, "…");
+    return {
+      id: p.slug,
+      title,
+      description,
+      seoTitle: deriveSeoTitle(title),
+      seoDescription: deriveSeoDescription(description),
+      updatedDate: p.modified,
+      contentHtml: injectHeadingIds(fixLazyImages(p.content.rendered)),
+    };
+  });
 }
 
 export async function fetchPosts(): Promise<LoadedPost[]> {
@@ -187,11 +227,14 @@ export async function fetchPosts(): Promise<LoadedPost[]> {
     const description = stripHtml(p.excerpt.rendered).replace(/\s+…\s*$/, "…");
 
     const featuredImage = p._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+    const title = decodeEntities(p.title.rendered);
 
     return {
       id: p.slug,
-      title: decodeEntities(p.title.rendered),
+      title,
       description,
+      seoTitle: deriveSeoTitle(title),
+      seoDescription: deriveSeoDescription(description),
       publishDate: p.date,
       updatedDate: p.modified,
       category: cat?.slug ?? "uncategorized",

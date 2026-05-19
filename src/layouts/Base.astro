@@ -9,6 +9,8 @@ import { Font } from "astro:assets";
 interface Props {
   title?: string;
   description?: string;
+  seoTitle?: string;
+  seoDescription?: string;
   ogImage?: string;
   article?: { publishedTime: string; modifiedTime?: string; tags?: string[] };
 }
@@ -16,11 +18,15 @@ interface Props {
 const {
   title = SITE.title,
   description = SITE.description,
+  seoTitle,
+  seoDescription,
   ogImage,
   article,
 } = Astro.props;
 
-const fullTitle = title === SITE.title ? title : `${title} · ${SITE.name}`;
+const fullTitle =
+  seoTitle ?? (title === SITE.title ? title : `${title} · ${SITE.name}`);
+const metaDescription = seoDescription ?? description;
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 const ogImageUrl = ogImage ?? new URL("/og-default.png", SITE.url).toString();
 
@@ -41,11 +47,11 @@ const plaBase = import.meta.env.DEV
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
 
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
 
     <meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:site_name" content={SITE.name} />
@@ -55,7 +61,7 @@ const plaBase = import.meta.env.DEV
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
 
     <Font cssVariable="--font-sans" preload />

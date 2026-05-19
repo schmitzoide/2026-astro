@@ -3,6 +3,18 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.2.0] — 2026-05-18
+
+### Added
+
+- **Build-time SEO title and description derivation for WP-sourced content.** `fetchPosts()` and `fetchPages()` now compute `seoTitle` (≤60 chars, brand-suffixed) and `seoDescription` (≤160 chars, ellipsis-trimmed) from each WP entry's title and excerpt. The article `<h1>` keeps the long, descriptive WP title (e.g. "Hackers Don't Break In, They Log In: Social Engineering, AI, and 'Polite Paranoia' You Can Use Today") while the `<title>` tag and OG/Twitter meta ship the short version. Title truncation prefers the first colon as a natural split point, falling back to a word-boundary cut. No edits required on the kitchen WP side; content authors keep writing punchy long titles.
+- **`seoTitle` and `seoDescription` props on `Base.astro`.** When provided, they drive the `<title>` tag and `<meta name="description">` (plus OG/Twitter title/description) directly, with no brand-suffix re-append. Falls back to the existing `title` + ` · Marcel Schmitz` composition when omitted.
+
+### Changed
+
+- **Homepage `<title>` trimmed.** Was 109 chars including the duplicate brand, now 43 chars ("Marcel Schmitz, software engineer in Porto"). Meta description tightened from ~165 to ~135 chars.
+- **Post and page templates pass derived SEO fields.** `posts/[...slug].astro`, `about.astro`, and `up-next.astro` now forward `data.seoTitle` / `data.seoDescription` to `Base.astro`.
+
 ## [1.1.0] — 2026-05-14
 
 ### Added

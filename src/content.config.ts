@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import type { Loader } from "astro/loaders";
-import { fetchPosts, fetchPages, type Heading } from "./lib/wp";
+import { fetchPosts, fetchPages } from "./lib/wp";
 
 const wordpressPostsLoader = (): Loader => ({
   name: "wordpress-posts",
@@ -49,6 +49,8 @@ const posts = defineCollection({
     id: z.string(),
     title: z.string(),
     description: z.string(),
+    seoTitle: z.string(),
+    seoDescription: z.string(),
     publishDate: z.coerce.date(),
     updatedDate: z.coerce.date(),
     category: z.string(),
@@ -61,7 +63,7 @@ const posts = defineCollection({
         text: z.string(),
         slug: z.string(),
       }),
-    ) satisfies z.ZodType<Heading[]>,
+    ),
     wordCount: z.number(),
     draft: z.boolean().default(false),
     featuredImage: z.string().optional(),
@@ -74,6 +76,8 @@ const pages = defineCollection({
     id: z.string(),
     title: z.string(),
     description: z.string(),
+    seoTitle: z.string(),
+    seoDescription: z.string(),
     updatedDate: z.coerce.date(),
     contentHtml: z.string(),
   }),
