@@ -26,6 +26,28 @@ const minutes = Math.max(1, Math.round(data.wordCount / 220));
 const url = new URL(`/posts/${post.id}/`, SITE.url).toString();
 const ogImage = data.featuredImage ?? new URL(`/posts/${post.id}/og.png`, SITE.url).toString();
 
+const postLanguage = data.language ?? SITE.locale;
+
+// hreflang alternates + in-article switcher links. Every page is its own
+// hreflang; every translation sibling adds one more.
+const alternates: Array<{ hreflang: string; href: string }> = [
+  { hreflang: postLanguage, href: url },
+];
+const SWITCHER_LABEL: Record<string, string> = {
+  en: "Read in English",
+  pt: "Ler em Português",
+};
+const switcherLinks: Array<{ lang: string; href: string; label: string }> = [];
+for (const [lang, sibling] of Object.entries(data.translations)) {
+  const siblingHref = `/posts/${sibling.slug}/`;
+  alternates.push({ hreflang: lang, href: new URL(siblingHref, SITE.url).toString() });
+  switcherLinks.push({
+    lang,
+    href: siblingHref,
+    label: SWITCHER_LABEL[lang] ?? `Read in ${lang.toUpperCase()}`,
+  });
+}
+
 const articleLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -47,7 +69,7 @@ const articleLd = {
   keywords: data.tags.join(", "),
   articleSection: data.categoryName,
   wordCount: data.wordCount,
-  inLanguage: SITE.locale,
+  inLanguage: postLanguage,
   url,
   mainEntityOfPage: url,
 };
@@ -68,6 +90,8 @@ const breadcrumbsLd = {
   seoTitle={data.seoTitle}
   seoDescription={data.seoDescription}
   ogImage={ogImage}
+  htmlLang={postLanguage}
+  alternates={alternates}
   article={{
     publishedTime: data.publishDate.toISOString(),
     modifiedTime: data.updatedDate.toISOString(),
@@ -99,6 +123,20 @@ const breadcrumbsLd = {
       <p class="mt-6 text-lg sm:text-xl text-[color:var(--fg-soft)] leading-relaxed">
         {data.description}
       </p>
+      {switcherLinks.length > 0 && (
+        <div class="mt-6 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[12px] text-[color:var(--fg-soft)]">
+          {switcherLinks.map((s) => (
+            <a
+              href={s.href}
+              hreflang={s.lang}
+              lang={s.lang}
+              class="inline-flex items-center gap-1.5 hover:text-[color:var(--accent)] transition-colors"
+            >
+              <span aria-hidden="true">↔</span> {s.label}
+            </a>
+          ))}
+        </div>
+      )}
     </header>
 
     <div class="mt-14 max-w-3xl">

@@ -112,11 +112,27 @@ interface WpPostRaw {
   title: { rendered: string };
   excerpt: { rendered: string };
   content: { rendered: string };
+  // Added by the marcel-headless-i18n plugin. Absent when the plugin or
+  // Polylang isn't active — the loader treats that as "no translations".
+  language?: string;
+  translations?:
+    | Record<string, { id: number; slug: string; url: string }>
+    | unknown[];
+  // Rank Math title + description, surfaced as REST meta by the same plugin.
+  // Used as overrides for the derived SEO title / description when present.
+  meta?: {
+    rank_math_title?: string;
+    rank_math_description?: string;
+  };
   _embedded?: {
     "wp:term"?: WpTerm[][];
     "wp:featuredmedia"?: Array<{ source_url?: string }>;
     author?: Array<{ name: string }>;
   };
+}
+
+export interface TranslationLink {
+  slug: string;
 }
 
 export interface LoadedPost {
@@ -135,6 +151,8 @@ export interface LoadedPost {
   wordCount: number;
   draft: boolean;
   featuredImage?: string;
+  language?: string;
+  translations: Record<string, TranslationLink>;
 }
 
 export interface LoadedPage {
@@ -229,12 +247,32 @@ export async function fetchPosts(): Promise<LoadedPost[]> {
     const featuredImage = p._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
     const title = decodeEntities(p.title.rendered);
 
+    // Plugin returns `{}` as an object when there are siblings, but PHP's empty
+    // array() serializes to `[]`. Normalize both to a typed map keyed by lang.
+    const translations: Record<string, TranslationLink> = {};
+    if (p.translations && !Array.isArray(p.translations)) {
+      for (const [lang, sibling] of Object.entries(p.translations)) {
+        if (sibling && typeof sibling === "object" && "slug" in sibling) {
+          translations[lang] = { slug: String(sibling.slug) };
+        }
+      }
+    }
+
+    // Rank Math overrides — when an editor has set a per-post title or
+    // description in Rank Math, prefer those over the derived defaults so
+    // the rendered <title> and <meta name="description"> reflect the
+    // editor's deliberate SEO copy.
+    const rmTitle = p.meta?.rank_math_title?.trim();
+    const rmDesc = p.meta?.rank_math_description?.trim();
+    const seoTitle = rmTitle && rmTitle !== "" ? rmTitle : deriveSeoTitle(title);
+    const seoDescription = rmDesc && rmDesc !== "" ? rmDesc : deriveSeoDescription(description);
+
     return {
       id: p.slug,
       title,
       description,
-      seoTitle: deriveSeoTitle(title),
-      seoDescription: deriveSeoDescription(description),
+      seoTitle,
+      seoDescription,
       publishDate: p.date,
       updatedDate: p.modified,
       category: cat?.slug ?? "uncategorized",
@@ -245,6 +283,8 @@ export async function fetchPosts(): Promise<LoadedPost[]> {
       wordCount: plain.split(/\s+/).filter(Boolean).length,
       draft: false,
       featuredImage,
+      language: typeof p.language === "string" && p.language !== "" ? p.language : undefined,
+      translations,
     };
   });
 }
