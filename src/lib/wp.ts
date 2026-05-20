@@ -118,6 +118,12 @@ interface WpPostRaw {
   translations?:
     | Record<string, { id: number; slug: string; url: string }>
     | unknown[];
+  // Rank Math title + description, surfaced as REST meta by the same plugin.
+  // Used as overrides for the derived SEO title / description when present.
+  meta?: {
+    rank_math_title?: string;
+    rank_math_description?: string;
+  };
   _embedded?: {
     "wp:term"?: WpTerm[][];
     "wp:featuredmedia"?: Array<{ source_url?: string }>;
@@ -252,12 +258,21 @@ export async function fetchPosts(): Promise<LoadedPost[]> {
       }
     }
 
+    // Rank Math overrides — when an editor has set a per-post title or
+    // description in Rank Math, prefer those over the derived defaults so
+    // the rendered <title> and <meta name="description"> reflect the
+    // editor's deliberate SEO copy.
+    const rmTitle = p.meta?.rank_math_title?.trim();
+    const rmDesc = p.meta?.rank_math_description?.trim();
+    const seoTitle = rmTitle && rmTitle !== "" ? rmTitle : deriveSeoTitle(title);
+    const seoDescription = rmDesc && rmDesc !== "" ? rmDesc : deriveSeoDescription(description);
+
     return {
       id: p.slug,
       title,
       description,
-      seoTitle: deriveSeoTitle(title),
-      seoDescription: deriveSeoDescription(description),
+      seoTitle,
+      seoDescription,
       publishDate: p.date,
       updatedDate: p.modified,
       category: cat?.slug ?? "uncategorized",
