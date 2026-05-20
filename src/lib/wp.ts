@@ -112,11 +112,21 @@ interface WpPostRaw {
   title: { rendered: string };
   excerpt: { rendered: string };
   content: { rendered: string };
+  // Added by the marcel-headless-i18n plugin. Absent when the plugin or
+  // Polylang isn't active — the loader treats that as "no translations".
+  language?: string;
+  translations?:
+    | Record<string, { id: number; slug: string; url: string }>
+    | unknown[];
   _embedded?: {
     "wp:term"?: WpTerm[][];
     "wp:featuredmedia"?: Array<{ source_url?: string }>;
     author?: Array<{ name: string }>;
   };
+}
+
+export interface TranslationLink {
+  slug: string;
 }
 
 export interface LoadedPost {
@@ -135,6 +145,8 @@ export interface LoadedPost {
   wordCount: number;
   draft: boolean;
   featuredImage?: string;
+  language?: string;
+  translations: Record<string, TranslationLink>;
 }
 
 export interface LoadedPage {
@@ -229,6 +241,17 @@ export async function fetchPosts(): Promise<LoadedPost[]> {
     const featuredImage = p._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
     const title = decodeEntities(p.title.rendered);
 
+    // Plugin returns `{}` as an object when there are siblings, but PHP's empty
+    // array() serializes to `[]`. Normalize both to a typed map keyed by lang.
+    const translations: Record<string, TranslationLink> = {};
+    if (p.translations && !Array.isArray(p.translations)) {
+      for (const [lang, sibling] of Object.entries(p.translations)) {
+        if (sibling && typeof sibling === "object" && "slug" in sibling) {
+          translations[lang] = { slug: String(sibling.slug) };
+        }
+      }
+    }
+
     return {
       id: p.slug,
       title,
@@ -245,6 +268,8 @@ export async function fetchPosts(): Promise<LoadedPost[]> {
       wordCount: plain.split(/\s+/).filter(Boolean).length,
       draft: false,
       featuredImage,
+      language: typeof p.language === "string" && p.language !== "" ? p.language : undefined,
+      translations,
     };
   });
 }

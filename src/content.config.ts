@@ -67,6 +67,8 @@ const posts = defineCollection({
     wordCount: z.number(),
     draft: z.boolean().default(false),
     featuredImage: z.string().optional(),
+    language: z.string().optional(),
+    translations: z.record(z.object({ slug: z.string() })).default({}),
   }),
 });
 

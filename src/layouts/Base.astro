@@ -13,6 +13,8 @@ interface Props {
   seoDescription?: string;
   ogImage?: string;
   article?: { publishedTime: string; modifiedTime?: string; tags?: string[] };
+  htmlLang?: string;
+  alternates?: Array<{ hreflang: string; href: string }>;
 }
 
 const {
@@ -22,6 +24,8 @@ const {
   seoDescription,
   ogImage,
   article,
+  htmlLang = SITE.locale,
+  alternates = [],
 } = Astro.props;
 
 const fullTitle =
@@ -37,7 +41,7 @@ const plaBase = import.meta.env.DEV
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,6 +52,9 @@ const plaBase = import.meta.env.DEV
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="theme-color" content="#0C314B" />
     <link rel="canonical" href={canonical} />
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
     <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
 
     <title>{fullTitle}</title>
