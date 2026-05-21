@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.3.1] — 2026-05-21
+
+### Fixed
+
+- **Homepage writing index filters to English posts only.** Was showing both EN and PT in the same list after the bilingual rollout, which doubled every entry. `src/pages/index.astro` now filters `getCollection("posts")` to `data.language === "en"` (defaulting empty to en). PT translations remain reachable via the per-post switcher and `/rss-pt.xml`; chrome stays EN-only per scope decision. Companion data fix (out of repo): set each PT post's publish date to match its EN sibling via wp-cli so the chronological order on a future PT index reflects the original publication date.
+
 ## [1.3.0] — 2026-05-21
 
 ### Added
