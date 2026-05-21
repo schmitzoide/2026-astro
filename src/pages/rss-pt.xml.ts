@@ -5,16 +5,13 @@ import { SITE } from "../lib/site";
 
 export async function GET(context: APIContext) {
   const posts = (
-    await getCollection(
-      "posts",
-      ({ data }) => !data.draft && (data.language ?? "en") === "en",
-    )
+    await getCollection("posts", ({ data }) => !data.draft && data.language === "pt"),
   ).sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
   return rss({
-    title: SITE.name,
+    title: `${SITE.name} (Português)`,
     description: SITE.description,
     site: context.site ?? SITE.url,
-    customData: "<language>en-US</language>",
+    customData: "<language>pt-PT</language>",
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.description,

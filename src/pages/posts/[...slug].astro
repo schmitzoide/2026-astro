@@ -113,7 +113,7 @@ const breadcrumbsLd = {
       <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[12px] text-[color:var(--fg-soft)] mb-6">
         <span class="text-[color:var(--accent)]">/{data.category}</span>
         <span aria-hidden="true">·</span>
-        <time datetime={data.publishDate.toISOString()}>{formatDateLong(data.publishDate)}</time>
+        <time datetime={data.publishDate.toISOString()}>{formatDateLong(data.publishDate, postLanguage)}</time>
         <span aria-hidden="true">·</span>
         <span aria-label={`${minutes} minute read`}>{minutes} min read</span>
       </div>

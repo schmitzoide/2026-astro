@@ -3,6 +3,7 @@ import { Resvg } from "@resvg/resvg-js";
 import { html } from "satori-html";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { bcp47For } from "./format";
 
 const fontDir = resolve(process.cwd(), "src/assets/og");
 
@@ -20,8 +21,8 @@ const MUTED = "#5A6B7A";
 
 const truncate = (s: string, n: number) => (s.length > n ? s.slice(0, n - 1).trim() + "…" : s);
 
-const formatDate = (d: Date) =>
-  d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+const formatDate = (d: Date, language?: string) =>
+  d.toLocaleDateString(bcp47For(language), { year: "numeric", month: "long", day: "numeric" });
 
 interface OgInput {
   title: string;
@@ -29,6 +30,7 @@ interface OgInput {
   category: string;
   date: Date;
   author: string;
+  language?: string;
 }
 
 export async function renderPostOg(input: OgInput): Promise<Uint8Array> {
@@ -38,7 +40,7 @@ export async function renderPostOg(input: OgInput): Promise<Uint8Array> {
         <div style="display:flex;align-items:center;gap:14px;font-size:22px;color:${MUTED};letter-spacing:0.04em;text-transform:uppercase;font-weight:400;">
           <span>${input.category}</span>
           <span style="opacity:0.5;">·</span>
-          <span>${formatDate(input.date)}</span>
+          <span>${formatDate(input.date, input.language)}</span>
         </div>
         <div style="display:flex;font-size:78px;font-weight:700;color:${TEAL};line-height:1.05;letter-spacing:-0.02em;margin-top:32px;">
           ${input.title}

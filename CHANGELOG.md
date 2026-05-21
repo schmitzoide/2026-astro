@@ -3,6 +3,21 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.3.0] — 2026-05-21
+
+### Added
+
+- **Per-language SEO and feed plumbing for translated posts.** Builds on the per-post `language` + `translations` data shipped in 1.2.0. Five things ship together:
+  - **`og:locale` and `og:locale:alternate`** in `Base.astro`, derived automatically from `htmlLang` and the existing `alternates` array. PT posts emit `og:locale=pt_PT` with `og:locale:alternate=en_US`, and vice versa, so LinkedIn and Facebook unfurl in the post's actual language.
+  - **Locale-aware date formatting** on the post page and Satori OG card. `src/lib/format.ts` exports `bcp47For()` and `ogLocaleFor()` helpers that map raw WP codes (`en`, `pt`) to BCP-47 tags (`en-US`, `pt-PT`). `formatDate` and `formatDateLong` now accept an optional `language` argument. PT posts render `21 de maio de 2026` instead of `May 21, 2026`, both on the page and in the OG card image.
+  - **Per-language RSS feeds.** `/rss.xml` is now English-only (with `<language>en-US</language>`); new `/rss-pt.xml` carries Portuguese posts (`<language>pt-PT</language>`). Both are linked from `<head>` with `hreflang` attributes so feed readers and crawlers can discover the right one.
+  - **Hreflang in the sitemap.** Replaced `@astrojs/sitemap` with a custom `src/pages/sitemap.xml.ts` endpoint. Every post URL now ships `<xhtml:link rel="alternate" hreflang="..." href="..." />` entries for itself and every translation sibling, plus `lastmod` from the post's updatedDate. `public/robots.txt` updated from `/sitemap-index.xml` to `/sitemap.xml`.
+  - **OG card knows the post's language.** `renderPostOg()` accepts an optional `language` and uses it for the date stamp. Posts with `featuredImage` continue to bypass the Satori card unchanged.
+
+### Removed
+
+- **`@astrojs/sitemap` integration.** Replaced by the custom endpoint above. The integration did not support flat-URL per-language hreflang without a `/pt/` prefix, and a 50-line custom endpoint gives us full control over `<xhtml:link>` alternates per URL.
+
 ## [1.2.1] — 2026-05-19
 
 ### Fixed

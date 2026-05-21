@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://marcelschmitz.com/sitemap-index.xml
+Sitemap: https://marcelschmitz.com/sitemap.xml

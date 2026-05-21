@@ -19,6 +19,7 @@ export const GET: APIRoute = async ({ props }) => {
     category: post.data.categoryName,
     date: post.data.publishDate,
     author: SITE.author,
+    language: post.data.language,
   });
   return new Response(new Uint8Array(png), {
     headers: {

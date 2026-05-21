@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../lib/site";
+import { ogLocaleFor } from "../lib/format";
 import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
 
@@ -34,6 +35,12 @@ const metaDescription = seoDescription ?? description;
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
 const ogImageUrl = ogImage ?? new URL("/og-default.png", SITE.url).toString();
 
+const ogLocale = ogLocaleFor(htmlLang);
+const ogLocaleAlternates = alternates
+  .filter((a) => a.hreflang !== htmlLang)
+  .map((a) => ogLocaleFor(a.hreflang))
+  .filter((loc, i, arr) => arr.indexOf(loc) === i && loc !== ogLocale);
+
 const plaApiKey = import.meta.env.PUBLIC_PLA_API_KEY;
 const plaBase = import.meta.env.DEV
   ? "http://localhost:3201"
@@ -55,7 +62,8 @@ const plaBase = import.meta.env.DEV
     {alternates.map((a) => (
       <link rel="alternate" hreflang={a.hreflang} href={a.href} />
     ))}
-    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} hreflang="en" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.name} (Português)`} hreflang="pt-PT" href="/rss-pt.xml" />
 
     <title>{fullTitle}</title>
     <meta name="description" content={metaDescription} />
@@ -66,6 +74,10 @@ const plaBase = import.meta.env.DEV
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={ogLocale} />
+    {ogLocaleAlternates.map((loc) => (
+      <meta property="og:locale:alternate" content={loc} />
+    ))}
     {article && <meta property="article:published_time" content={article.publishedTime} />}
     {article?.modifiedTime && <meta property="article:modified_time" content={article.modifiedTime} />}
     {article?.tags?.map((t) => <meta property="article:tag" content={t} />)}
