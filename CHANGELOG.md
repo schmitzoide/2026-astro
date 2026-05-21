@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.3.3] — 2026-05-21
+
+### Fixed
+
+- **Homepage OG card was blank** (just an orange border on a cream background). Root cause: `astro-og-canvas` + `canvaskit-wasm` silently failed to load the Albert Sans TTFs at build time (`---- failed to open <0> as a font`), so text was never drawn. Rewrote `src/pages/og-default.png.ts` to use the same Satori + Resvg pipeline already used for per-post OG cards, plus a new `renderHomeOg()` helper in `src/lib/og.ts`. Result is a branded card with "SOFTWARE ENGINEER · Marcel Schmitz · Writing on agentic development, security…" on a white background with the same teal/Albert Sans treatment as post cards. Removed `astro-og-canvas` and `canvaskit-wasm` from dependencies.
+
 ## [1.3.2] — 2026-05-21
 
 ### Changed

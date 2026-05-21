@@ -33,6 +33,38 @@ interface OgInput {
   language?: string;
 }
 
+interface HomeOgInput {
+  name: string;
+  tagline: string;
+  description: string;
+  url: string;
+}
+
+export async function renderHomeOg(input: HomeOgInput): Promise<Uint8Array> {
+  const markup = html(`
+    <div style="display:flex;flex-direction:column;width:100%;height:100%;background:${WHITE};padding:90px 100px;justify-content:space-between;font-family:'Albert Sans';">
+      <div style="display:flex;flex-direction:column;">
+        <div style="display:flex;font-size:22px;color:${MUTED};letter-spacing:0.08em;text-transform:uppercase;font-weight:400;">
+          ${input.tagline}
+        </div>
+        <div style="display:flex;font-size:120px;font-weight:700;color:${TEAL};line-height:1.0;letter-spacing:-0.03em;margin-top:36px;">
+          ${input.name}
+        </div>
+        <div style="display:flex;font-size:32px;font-style:italic;color:${TEAL};opacity:0.78;line-height:1.4;margin-top:32px;max-width:980px;">
+          ${truncate(input.description, 180)}
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;border-top:2px solid ${TEAL};padding-top:26px;">
+        <div style="display:flex;font-size:26px;font-weight:700;color:${TEAL};letter-spacing:0.02em;">${input.url}</div>
+        <div style="display:flex;font-size:22px;color:${MUTED};">Porto, Portugal</div>
+      </div>
+    </div>
+  `);
+
+  const svg = await satori(markup as Parameters<typeof satori>[0], { width: W, height: H, fonts });
+  return new Resvg(svg, { background: WHITE }).render().asPng();
+}
+
 export async function renderPostOg(input: OgInput): Promise<Uint8Array> {
   const markup = html(`
     <div style="display:flex;flex-direction:column;width:100%;height:100%;background:${WHITE};padding:80px 90px;justify-content:space-between;font-family:'Albert Sans';">
