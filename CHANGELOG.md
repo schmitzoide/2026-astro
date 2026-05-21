@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.3.2] — 2026-05-21
+
+### Changed
+
+- **Language switcher moved to the top of the post page, on the same line as the "← All writing" link, with a country flag instead of the `↔` arrow.** Was previously below the description, which buried it. Now: left side shows `← All writing`, right side shows `🇵🇹 Ler em Português` (on an EN post) or `🇬🇧 Read in English` (on a PT post). Flags are emoji so they inherit the page font and need no asset pipeline. Used 🇬🇧 for English since the audience is European and `🇬🇧` is the conventional "international English" toggle (vs `🇺🇸` which reads US-specific).
+
 ## [1.3.1] — 2026-05-21
 
 ### Fixed
