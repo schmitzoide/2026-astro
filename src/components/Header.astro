@@ -17,7 +17,7 @@ const path = Astro.url.pathname;
     >
       <span class="text-[color:var(--fg-soft)]" aria-hidden="true">~/</span>marcel<span class="text-[color:var(--fg-soft)]" aria-hidden="true">.schmitz</span>
     </a>
-    <nav class="flex flex-wrap items-center gap-x-0.5 sm:gap-x-1 font-mono text-[13px] -ml-2 sm:ml-0" aria-label="Primary">
+    <nav class="flex flex-wrap items-center gap-x-0.5 sm:gap-x-1 font-mono text-[13px] -ml-2 sm:ml-0 w-full sm:w-auto min-w-0" aria-label="Primary">
       {NAV.map((item) => {
         const active = item.href === "/" ? path === "/" : path.startsWith(item.href);
         const external = item.href.startsWith("http");

@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
+import { TOOL_GROUPS } from "../data/tools";
+import { ALL_APPEARANCES } from "../data/appearances";
 import { Image } from "astro:assets";
 import { formatDateMono } from "../lib/format";
 import { SITE } from "../lib/site";
@@ -25,6 +27,34 @@ const categoryLabel: Record<string, string> = {
 };
 
 const yearsBuilding = new Date().getFullYear() - 1998;
+
+// The next event is read out of the WordPress Up Next page rather than kept in
+// a second place, so the teaser can never disagree with the page it links to.
+// Everything before the "Earlier this year" h3 is still upcoming; the page's
+// shape is a bold date paragraph followed by an h4 naming the event. If either
+// stops matching, the card is dropped rather than rendering something wrong.
+const upNextPage = await getEntry("pages", "up-next");
+const upcomingHtml = upNextPage?.data.contentHtml.split("<h3")[0] ?? "";
+const nextDate = upcomingHtml.match(/<strong>([\s\S]*?)<\/strong>/)?.[1]?.trim();
+const nextEvent = upcomingHtml
+  .match(/<h4[^>]*>([\s\S]*?)<\/h4>/)?.[1]
+  ?.replace(/<[^>]+>/g, "")
+  .split(",")[0]
+  .trim();
+
+const featuredTool = TOOL_GROUPS[0].tools[0];
+const toolCount = TOOL_GROUPS.flatMap((g) => g.tools).length;
+
+const latestAppearance = [...ALL_APPEARANCES].sort((a, b) =>
+  b.date.localeCompare(a.date),
+)[0];
+const latestAppearanceDate = new Date(
+  `${latestAppearance.date}T12:00:00Z`,
+).toLocaleDateString("en-GB", {
+  year: "numeric",
+  month: "short",
+  timeZone: "UTC",
+});
 
 const homepageSeoTitle = "Marcel Schmitz, software engineer in Porto";
 const homepageDescription = `Marcel Schmitz writes on agentic development, AI security, and ${yearsBuilding}+ years of building software. Porto-based, founder of Pluginslab.`;
@@ -156,15 +186,48 @@ const blogLd = {
     </ul>
   </section>
 
+  <section class="mx-auto max-w-5xl px-6 lg:px-10 pb-16" aria-label="Elsewhere on this site">
+    <div class="border-t border-[color:var(--rule)] pt-10 grid gap-10 sm:grid-cols-3">
+      {nextEvent && nextDate && (
+        <div class="flex flex-col">
+          <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Speaking next</h2>
+          <p class="font-serif text-xl leading-snug tracking-tight">{nextEvent}</p>
+          <p class="mt-1 font-mono text-[12px] text-[color:var(--fg-soft)]">{nextDate}</p>
+          <p class="pt-5 mt-auto">
+            <a href="/up-next/" class="group font-mono text-[12px] text-[color:var(--fg-soft)] hover:text-[color:var(--accent)] transition-colors">
+              All upcoming <span aria-hidden="true" class="inline-block group-hover:translate-x-0.5 transition-transform">→</span>
+            </a>
+          </p>
+        </div>
+      )}
+      <div class="flex flex-col">
+        <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Open source</h2>
+        <p class="font-serif text-xl leading-snug tracking-tight">{featuredTool.name}</p>
+        <p class="mt-1 text-[14px] text-[color:var(--fg-soft)] leading-relaxed">{featuredTool.tagline}</p>
+        <p class="pt-5 mt-auto">
+          <a href="/tools/" class="group font-mono text-[12px] text-[color:var(--fg-soft)] hover:text-[color:var(--accent)] transition-colors">
+            All {toolCount} tools <span aria-hidden="true" class="inline-block group-hover:translate-x-0.5 transition-transform">→</span>
+          </a>
+        </p>
+      </div>
+      <div class="flex flex-col">
+        <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Latest appearance</h2>
+        <p class="font-serif text-xl leading-snug tracking-tight">{latestAppearance.title}</p>
+        <p class="mt-1 font-mono text-[12px] text-[color:var(--fg-soft)]">{latestAppearance.venue} · {latestAppearanceDate}</p>
+        <p class="pt-5 mt-auto">
+          <a href="/appearances/" class="group font-mono text-[12px] text-[color:var(--fg-soft)] hover:text-[color:var(--accent)] transition-colors">
+            All {ALL_APPEARANCES.length} appearances <span aria-hidden="true" class="inline-block group-hover:translate-x-0.5 transition-transform">→</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="mx-auto max-w-5xl px-6 lg:px-10 pb-12" aria-label="Quick facts">
-    <div class="border-t border-[color:var(--rule)] pt-10 grid sm:grid-cols-3 gap-8">
+    <div class="border-t border-[color:var(--rule)] pt-10 grid sm:grid-cols-2 gap-8">
       <div>
         <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Currently</h2>
         <p class="text-[15px] leading-relaxed">Running <a href="https://pluginslab.com" class="underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)]" target="_blank" rel="noopener">Pluginslab</a>, taking selective freelance via Codeable, and shipping side projects.</p>
-      </div>
-      <div>
-        <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Going next</h2>
-        <p class="text-[15px] leading-relaxed">WordCamp Belgrade · WordCamp Galicia · WordPress Day for AI, Faro. Speaking at all three. See <a href="/up-next/" class="underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)]">Up Next</a>, or past <a href="/appearances/" class="underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)]">podcasts and talks</a>.</p>
       </div>
       <div>
         <h2 class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-3">Get in touch</h2>

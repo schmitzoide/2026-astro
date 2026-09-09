@@ -3,6 +3,27 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.0] — 2026-09-09
+
+### Added
+
+- **Appearances in the primary nav**, after Tools: Writing · About · Up Next · Tools · Appearances · Hire. Verified at a true 390px, where the nav wraps to two tidy rows under the wordmark with nothing clipped.
+- **A three-up section on the homepage** showing the latest of each list, above the quick facts: **Speaking next** (the next event with its dates), **Open source** (`wp-devdocs-mcp` with its tagline), and **Latest appearance** (newest by date, currently the WordCamp Portugal talk). Each links through to its full list with a count, so the numbers advertise themselves: "All 6 tools", "All 22 appearances".
+- The next event is **parsed out of the WordPress Up Next page** at build time rather than kept in a second file, so the teaser cannot disagree with the page it links to. Everything before the "Earlier this year" `h3` is upcoming; the first bold date and following `h4` are the next event. If either stops matching, the card is dropped rather than rendering something wrong.
+
+### Changed
+
+- **Quick facts drops "Going next" and becomes a two-up** (Currently, Get in touch). The new section says the same thing with real data, so keeping both was duplication.
+
+### Fixed
+
+- **The nav could not wrap internally.** It is a flex item, so its default `min-width: auto` meant it could never shrink below its content width and its own `flex-wrap` never engaged. Now `w-full sm:w-auto min-w-0`: on a phone it takes its own full-width row and wraps inside; from `sm` up it sits beside the wordmark as before.
+- The three homepage cards bottom-align their links with `mt-auto`. Titles differ in length by up to three lines, which left the arrows at three different heights.
+
+### Notes
+
+- **The headless screenshot harness crops a wider viewport than `--window-size` suggests**, which made several pages look like they had horizontal overflow when they did not. Verified by rendering the site inside a genuine 390px iframe instead. Worth remembering before chasing a phantom layout bug: measure in an iframe, not in a cropped screenshot.
+
 ## [1.7.0] — 2026-09-09
 
 ### Added
