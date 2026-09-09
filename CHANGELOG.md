@@ -3,6 +3,32 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.4.0] — 2026-09-09
+
+### Changed
+
+- **Up Next refreshed for the autumn run, and the homepage "Going next" line with it.** The WordPress page (`up-next`, ID 106 on kitchen) had not been touched since 19 May and had gone stale: two of its three entries (WordCamp Portugal in May, WCEU Kraków in June) were already in the past, and `index.astro` hardcoded the same three events in its "Going next" cell. The page now leads with the three confirmed autumn dates, each with the slot time pulled from the event's own REST API rather than guessed:
+  - **WordCamp Belgrade, 18-19 Sep.** Speaking Saturday 13:20, *Code is cheap, judgment is not*. Slot and session URL from `belgrade.wordcamp.org/2026/wp-json/wp/v2/sessions`.
+  - **WordCamp Galicia, A Coruña, 16-18 Oct.** Speaking Saturday 10:00 in the main room with Ivelina Dimova, *The Browser is the Agent*. Slot, room and session URL from the Galicia REST API; the description is condensed from the organisers' own published abstract.
+  - **WordPress Day for AI, Faro, 24 Oct.** Speaking in the business track in Portuguese, *A IA não é um desconto. É capacidade.* Codeable is credited as sponsor of the day.
+- **`index.astro` "Going next" now reads "WordCamp Belgrade · WordCamp Galicia · WordPress Day for AI, Faro. Speaking at all three."** This is the only part of Up Next that lives in the repo, so it has to be edited in tandem with the WP page or the two drift, which is exactly what happened between May and September.
+
+### Added
+
+- **"Earlier this year" section on Up Next**, carrying the WordCamp Portugal entry (all three sessions, links intact) and WCEU Kraków, rewritten into the past tense. A strictly forward-looking page empties out between events and loses the evidence of a speaking record; this way it degrades gracefully.
+
+### Removed
+
+- **performance.now() 2026 (Amsterdam, 19-20 Nov)** from Up Next. Not attending.
+- **WordCamp Athens (December)** stays off until the organisers publish official dates. Only a third-party aggregator lists 11-12 December, and the WordCamp site still says early planning.
+- **WordCamp Valencia (31 Oct to 1 Nov)** stays off pending a decision from the organisers. Submitted 31 Aug, no answer yet.
+
+### Notes
+
+- **The kitchen REST API cannot be written to.** nginx strips the `Authorization` header, so a bogus credential and no credential return byte-identical `rest_forbidden_context` responses and the `WP_APP_PASSWORD` in `.env` is unusable for writes. Content edits have to go through wp-admin or `wp-cli` over SSH (`prod3:/home/marcelschmitz-jg6lo/kitchen.marcelschmitz.com/public`). This edit used `wp post update 106`.
+- **The page excerpt is auto-generated**, so `description` / `seoDescription` for `/up-next/` is now the first ~55 words of the Belgrade entry. Fine, but a hand-written excerpt or a Rank Math description would read better in search results.
+- Docs rewritten in the same pass: the folder-level `CLAUDE.md` still described the pre-Astro WordPress theme site, and `README.md` was still the untouched Astro minimal starter template.
+
 ## [1.3.3] — 2026-05-21
 
 ### Fixed
