@@ -31,5 +31,6 @@ export const NAV = [
   { label: "Writing", href: "/" },
   { label: "About", href: "/about" },
   { label: "Up Next", href: "/up-next" },
+  { label: "Tools", href: "/tools" },
   { label: "Hire", href: "https://app.codeable.io/tasks/new?preferredContractor=22877&ref=4BTzD" },
 ] as const;

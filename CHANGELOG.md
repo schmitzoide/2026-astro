@@ -3,6 +3,22 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.6.0] — 2026-09-09
+
+### Added
+
+- **New `/tools/` page** listing the open-source tools, and a **Tools** entry in the primary nav (now Writing · About · Up Next · Tools · Hire). Six tools in three groups:
+  - **The WordPress MCP trio** — `wp-devdocs-mcp` (verified hook database), `wp-blockmarkup-mcp` (block schemas plus two-tier markup validation), `wp-playground-mcp` (ephemeral WordPress in WASM). Grouped because `wp-playground-mcp`'s own README already frames them as **author → validate → test**, which is a better story than three separate entries.
+  - **The harness** — `wp-agentic-kit`, structured around the four D's from the WordCamp Portugal talk.
+  - **Also** — `wims` (not WordPress-specific) and `wp-agentic-admin` (a plugin for site owners rather than a developer tool, so grouped apart rather than dropped).
+- **`src/data/tools.ts`**, the page's content. Deliberately **not** in WordPress, unlike Writing, About and Up Next: this content is structured (install command, repo, npm package, licence) rather than prose, and running shell one-liners through Gutenberg invites smart-quote damage. The trade-off is that this one page is not editable from wp-admin.
+- **`src/lib/github.ts`**, build-time star counts. One request for the whole account rather than one per repo. **Every failure path returns an empty map instead of throwing**: GitHub being unreachable, rate limiting the build host, or changing its response shape must never take the site down. Stars simply do not render.
+- **`ItemList` / `SoftwareSourceCode` JSON-LD** on the page.
+
+### Fixed
+
+- **The star fetch initially hit `/orgs/pluginslab/repos` and 404'd on every build.** `github.com/pluginslab` is a **User** account, not an Organization. Now `/users/pluginslab/repos?type=owner`. Worth recording that the fallback did its job when this was wrong: the build completed and the page rendered without stars rather than failing.
+
 ## [1.5.0] — 2026-09-09
 
 ### Added
