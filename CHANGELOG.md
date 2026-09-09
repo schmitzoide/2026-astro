@@ -3,6 +3,18 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.6.1] — 2026-09-09
+
+### Fixed
+
+- **Primary nav was clipped on narrow viewports.** Adding Tools took the nav to five items plus the theme toggle, which no longer fits beside the `~/marcel.schmitz` wordmark on a phone: the last item ran off the edge and "Up Next" broke across two lines. The header row is now `flex-wrap`, so the nav drops to its own line under the wordmark once it stops fitting, and the nav itself wraps rather than overflowing. Link labels get `whitespace-nowrap` so a two-word label is never split, with slightly tighter horizontal padding below `sm`. The 44px minimum touch targets are unchanged.
+
+### Changed
+
+- **`wp-agentic-admin` now credits Ivelina Dimova as co-author**, linked to her GitHub, with a pointer to the joint WordCamp Galicia talk in October. She is the second-largest contributor to the repo.
+- **The tool bodies in `src/data/tools.ts` support `[text](url)` links**, not just backtick code spans. Hrefs are restricted to `https://` in the renderer so a stray value cannot become a `javascript:` URL.
+- **Dropped the "13 contributors" claim** from the `wp-agentic-admin` copy. The GitHub contributors API lists 11 commit authors, and the difference is presumably hackathon participants who never committed. Rather than publish a number that does not match the public record, the copy now says "built with the team at the CloudFest Hackathon 2026". Put the figure back if 13 is the number you want to stand behind.
+
 ## [1.6.0] — 2026-09-09
 
 ### Added

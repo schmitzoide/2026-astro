@@ -16,14 +16,21 @@ const escapeHtml = (s: string) =>
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-// The tool bodies are written with markdown-style backticks for inline code.
-// Escape first, then promote the backticks, so the copy stays readable in
-// tools.ts without shipping raw HTML through the data file.
+// The tool bodies are written with markdown-style backticks for inline code
+// and [text](url) for links. Escape first, then promote both, so the copy
+// stays readable in tools.ts without shipping raw HTML through the data file.
+// Link hrefs are restricted to https:// so a stray value cannot become a
+// javascript: URL.
 const richText = (s: string) =>
-  escapeHtml(s).replace(
-    /`([^`]+)`/g,
-    '<code class="font-mono text-[0.9em] bg-[color:var(--bg-soft)] px-1 py-0.5 rounded">$1</code>',
-  );
+  escapeHtml(s)
+    .replace(
+      /`([^`]+)`/g,
+      '<code class="font-mono text-[0.9em] bg-[color:var(--bg-soft)] px-1 py-0.5 rounded">$1</code>',
+    )
+    .replace(
+      /\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener" class="text-[color:var(--fg)] underline decoration-[color:var(--rule)] underline-offset-4 hover:decoration-[color:var(--accent)] transition-colors">$1</a>',
+    );
 
 const repoUrl = (repo: string) => `https://github.com/pluginslab/${repo}`;
 const npmUrl = (pkg: string) => `https://www.npmjs.com/package/${pkg}`;

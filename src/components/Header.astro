@@ -7,7 +7,9 @@ const path = Astro.url.pathname;
   class="sticky top-0 z-50 backdrop-blur-md bg-[color:var(--bg)]/80 border-b border-[color:var(--rule)]"
   role="banner"
 >
-  <div class="mx-auto max-w-5xl px-6 lg:px-10 min-h-14 flex items-center justify-between gap-4">
+  <!-- flex-wrap, so once the nav no longer fits beside the wordmark (five items
+       since Tools was added) it drops to its own line instead of being clipped. -->
+  <div class="mx-auto max-w-5xl px-6 lg:px-10 min-h-14 py-1.5 sm:py-0 flex flex-wrap items-center justify-between gap-x-4">
     <a
       href="/"
       class="font-mono text-[13px] tracking-tight hover:text-[color:var(--accent)] transition-colors py-3 -my-3"
@@ -15,7 +17,7 @@ const path = Astro.url.pathname;
     >
       <span class="text-[color:var(--fg-soft)]" aria-hidden="true">~/</span>marcel<span class="text-[color:var(--fg-soft)]" aria-hidden="true">.schmitz</span>
     </a>
-    <nav class="flex items-center gap-0.5 sm:gap-1 font-mono text-[13px]" aria-label="Primary">
+    <nav class="flex flex-wrap items-center gap-x-0.5 sm:gap-x-1 font-mono text-[13px] -ml-2 sm:ml-0" aria-label="Primary">
       {NAV.map((item) => {
         const active = item.href === "/" ? path === "/" : path.startsWith(item.href);
         const external = item.href.startsWith("http");
@@ -23,7 +25,7 @@ const path = Astro.url.pathname;
           <a
             href={item.href}
             class:list={[
-              "px-2.5 py-3 -my-1 rounded transition-colors min-h-11 inline-flex items-center",
+              "px-2 sm:px-2.5 py-3 -my-1 rounded transition-colors min-h-11 inline-flex items-center whitespace-nowrap",
               active ? "text-[color:var(--accent)]" : "text-[color:var(--fg-soft)] hover:text-[color:var(--fg)]",
             ]}
             target={external ? "_blank" : undefined}
@@ -37,7 +39,7 @@ const path = Astro.url.pathname;
       <button
         id="theme-toggle"
         type="button"
-        class="ml-1 px-2.5 py-3 -my-1 rounded font-mono text-[13px] text-[color:var(--fg-soft)] hover:text-[color:var(--fg)] transition-colors min-h-11 min-w-11 inline-flex items-center justify-center"
+        class="ml-0.5 sm:ml-1 px-2 sm:px-2.5 py-3 -my-1 rounded font-mono text-[13px] text-[color:var(--fg-soft)] hover:text-[color:var(--fg)] transition-colors min-h-11 min-w-11 inline-flex items-center justify-center"
         aria-label="Switch to dark theme"
         aria-pressed="false"
       >

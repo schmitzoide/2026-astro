@@ -101,7 +101,7 @@ export const TOOL_GROUPS: ToolGroup[] = [
         repo: "wp-agentic-admin",
         name: "wp-agentic-admin",
         tagline: "A site reliability engineer that never leaves the browser",
-        body: "Describe the problem in plain English inside wp-admin and a local model reads the error log, names the plugin at fault, proposes a fix and applies it with your approval. The model runs in the browser through WebLLM and WebGPU, so no admin data reaches a third party, there are no API costs and no GPU to rent. Built at the CloudFest Hackathon 2026 with 13 contributors, on the WordPress Abilities API.",
+        body: "Describe the problem in plain English inside wp-admin and a local model reads the error log, names the plugin at fault, proposes a fix and applies it with your approval. The model runs in the browser through WebLLM and WebGPU, so no admin data reaches a third party, there are no API costs and no GPU to rent. Co-authored with [Ivelina Dimova](https://github.com/ivdimova), built with the team at the CloudFest Hackathon 2026 on the WordPress Abilities API. We present it together at WordCamp Galicia in October.",
         license: "GPL-2.0",
       },
     ],
