@@ -2,7 +2,7 @@ import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
 import { SITE } from "../lib/site";
 
-const STATIC_PATHS = ["/", "/about/", "/up-next/"];
+const STATIC_PATHS = ["/", "/about/", "/up-next/", "/tools/", "/appearances/"];
 
 const escapeXml = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");

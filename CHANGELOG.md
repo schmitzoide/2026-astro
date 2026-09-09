@@ -3,6 +3,29 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.7.0] — 2026-09-09
+
+### Added
+
+- **New `/appearances/` page**: 22 podcast, interview and recorded-talk appearances between 2017 and 2026, in three groups plus a press section. Linked from the homepage rather than the nav, which is already at five items.
+  - **Open Makers, as co-host** — ten episodes on Open Channels FM (formerly Do the Woo) with Mike Andreasen, 2024-05 to 2025-03. Pulled from the network's own REST API via the `hosts` taxonomy, so titles and dates are exact rather than scraped.
+  - **As a guest** — six, including WooCommerce Live: eCommerce Design on the official WooCommerce channel (hosts Noëlle Steegs and Jonathan Wold), Greyd Conversations #14, Kinsta Talk, Changing Lives with Codeable, WP Tavern Jukebox #42, and the 2021 Do the Woo episode that predates the co-hosting by three years.
+  - **Talks on video** — five from WordPress.tv plus the WPSessions AR session.
+  - **Press** — the two 2018 WP Tavern articles about the WordCamp iOS app, kept in their own section and labelled as coverage rather than appearances.
+- **`src/data/appearances.ts`** and **`scripts/fetch-appearance-images.mjs`**. The script resolves each source page's `og:image` (or the YouTube thumbnail by video id), downloads it, and resizes to 800px JPEG into `public/appearances/`. Downloaded once and committed rather than hotlinked: hotlinking would leak the reader's IP to six third parties and break silently whenever any of them reorganised its media library.
+- `/tools/` and `/appearances/` added to `sitemap.xml`. **`/tools/` had been missing from the sitemap since 1.6.0.**
+
+### Fixed
+
+- **Appearance thumbnails were cropping their artwork.** The flex row had no `align-items`, so the default `stretch` set an explicit height on each `<img>`, which overrides `aspect-ratio` and made `object-fit: cover` crop the middle out of every card. Titles were being sliced off both edges. Fixed with `items-start`.
+
+### Notes
+
+- **Per-episode og:image was the original plan for the co-host run and was dropped.** All eleven Open Channels pages return the identical generic Open Makers show cover, so per-episode art would have rendered ten copies of the same tile. The cover now appears once, on the group. The 2021 Do the Woo guest episode returns that same file (verified byte-identical by checksum) so it carries no image either. Everywhere else the og:images are genuinely distinct video thumbnails.
+- **Two things searched for and not found**, recorded so nobody hunts twice: there is no podcast called "Grayd" (it is **Greyd**, greyd.io), and Marcel does not appear on dothewoo.com, whose site search returns false positives, his name appears nowhere in those pages' HTML.
+- **WPSessions "Augmented Reality and WooCommerce" carries no published date.** Listed as approximately October 2019, inferred from the upload path of its image (`/wp-content/uploads/2019/10/`), and flagged as approximate in the UI.
+- Excluded as mentions rather than appearances: WPWeekly #317 (2018) and WP Builds This Week in WordPress #222 (2022). Both were checked; he is a news item in the show notes of each.
+
 ## [1.6.1] — 2026-09-09
 
 ### Fixed
