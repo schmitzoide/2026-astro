@@ -3,6 +3,19 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.5.0] — 2026-09-09
+
+### Added
+
+- **Event banner cards on Up Next**, one per event, rendered by a new `scripts/render-event-cards.mjs` on the Satori + Resvg pipeline the OG cards already use. 1200×480 on the ink ground (`#0C314B`) with cream text and the dark-theme accent (`#F59E6B`, since the light `#C2410C` is too close to the ink to hold at 22px). Each card carries the role ("Speaking · Saturday 13:20"), the event name, the venue or city, and the dates.
+- **`public/events/*.png`**, the five rendered cards, shipped with the frontend.
+
+### Notes
+
+- **Why not the events' own `og:image` files**, which was the original idea. All five were pulled and inspected: WCEU Kraków and Belgrade are **screenshots of their own homepages** (the Belgrade one with its headline sliced off mid-sentence), Faro is a near-white lettermark that would vanish on the paper background and in dark mode, and Galicia is a 553×475 group photo of a *previous* edition with a yellow and blue frame baked in. Only WordCamp Portugal's is a genuine, usable photo. Four different aspect ratios, five clashing brand identities, two of them screenshots. Rendering our own was the only way to get something that looks deliberate.
+- **The cards are referenced by absolute URL** (`https://marcelschmitz.com/events/<slug>.png`), not from the WordPress media library. Two blockers made the library impossible: the `deploy`/`ploi` user on prod3 cannot write to kitchen's `wp-content/uploads` (owned by `marcelschmitz-jg6lo`, no passwordless sudo, site user's SSH key not held here), and the REST media endpoint is dead for the same stripped-`Authorization` reason noted in 1.4.0. The absolute URL has the side benefit of rendering correctly inside the wp-admin editor, which a root-relative path would not.
+- `width` and `height` are set on every `<img>`. WP markup is injected with `set:html` and never touches `astro:assets`, so nothing else would reserve the space and the page would shift on load.
+
 ## [1.4.0] — 2026-09-09
 
 ### Changed
