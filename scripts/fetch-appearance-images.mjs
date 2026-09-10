@@ -23,6 +23,7 @@ const outDir = resolve(process.cwd(), "public/appearances");
 const SOURCES = {
   "open-makers-cover":
     "https://i0.wp.com/openchannels.fm/wp-content/uploads/2025/08/Open-Makers-on-Open-Channels-FM-Podcast-Network.jpg?fit=1200%2C1200&ssl=1",
+  "fellyph-futuro-agencias": "https://www.youtube.com/watch?v=u0jyv6BNIk8",
   "greyd-conversations-14": "https://www.youtube.com/watch?v=1BvoYchYAAk",
   "codeable-changing-lives": "https://www.youtube.com/watch?v=aO61zBL6x6w",
   "kinsta-talk-distros": "https://www.youtube.com/watch?v=z4bQhNh1Pdw",

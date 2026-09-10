@@ -137,6 +137,16 @@ export const APPEARANCE_GROUPS: AppearanceGroup[] = [
       "Interviews and panels on other people's shows, from the official WooCommerce channel to hosting companies and the WordPress press.",
     items: [
       {
+        date: "2026-09-10",
+        title: "O Futuro das Agências na Era da IA",
+        venue: "Fellyph Cintra",
+        url: "https://www.youtube.com/watch?v=u0jyv6BNIk8",
+        role: "Guest",
+        withWhom: "host Fellyph Cintra",
+        note: "In Portuguese. Orchestrating agents with WP Dev Docs MCP and Playground, and what that does to how an agency prices and estimates.",
+        image: "fellyph-futuro-agencias",
+      },
+      {
         date: "2026-02-19",
         title: "Modern WordPress Architecture: What Agencies Should Actually Care About",
         venue: "Greyd Conversations #14",

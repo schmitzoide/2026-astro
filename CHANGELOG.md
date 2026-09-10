@@ -3,6 +3,13 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.1] — 2026-09-10
+
+### Added
+
+- **New guest appearance: "O Futuro das Agências na Era da IA"** with Fellyph Cintra on his YouTube channel, published 2026-09-10. In Portuguese: orchestrating agents with WP Dev Docs MCP and Playground, and what that does to agency pricing and estimates. It is now the newest entry, so it also becomes the homepage's **Latest appearance** card, and the counts move from 22 to 23 on their own because both derive from `ALL_APPEARANCES`.
+- Thumbnail `public/appearances/fellyph-futuro-agencias.jpg`, fetched by `scripts/fetch-appearance-images.mjs` like the others (YouTube `maxresdefault` by video id, resized to 800px).
+
 ## [1.8.0] — 2026-09-09
 
 ### Added
