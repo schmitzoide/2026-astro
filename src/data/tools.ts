@@ -86,7 +86,7 @@ export const TOOL_GROUPS: ToolGroup[] = [
     id: "also",
     title: "Also",
     blurb:
-      "One tool for anyone living in Claude Code all day, and one that is less a developer tool than an argument about where AI should run.",
+      "Two tools for anyone living in Claude Code all day, and one that is less a developer tool than an argument about where AI should run.",
     tools: [
       {
         repo: "wims",
@@ -95,6 +95,13 @@ export const TOOL_GROUPS: ToolGroup[] = [
         body: "`claude --resume` only lists sessions for the directory you happen to be standing in, so a good session from three days and forty folders ago is effectively lost. wims lists every session on the machine, lets you search and preview them, and drops your shell into the right folder with the conversation resumed. Not WordPress-specific, and the one I reach for most.",
         install: "npm install -g @pluginslab/wims",
         npm: "@pluginslab/wims",
+        license: "MIT",
+      },
+      {
+        repo: "smart-terminal",
+        name: "Smart Terminal",
+        tagline: "Terminal.app with tab groups and tabs that know Claude is in them",
+        body: "Five Claude Code sessions in Terminal.app means five tabs that all say `zsh`. Smart Terminal is a native macOS terminal that keeps your Terminal.app profile and adds Chrome-style tab groups: rename tabs, gather them into named, colored, collapsible groups and drag them between windows. A tab running Claude Code names itself after the session, shows whether Claude is working or waiting on you, and sends a notification when one you cannot see needs an answer. [Download the notarized DMG](https://github.com/pluginslab/smart-terminal/releases/latest) for macOS 26.",
         license: "MIT",
       },
       {

@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.2] — 2026-09-24
+
+### Added
+
+- **Smart Terminal on /tools**, in the *Also* group next to wims: a native macOS terminal with Chrome-style tab groups and Claude Code-aware tabs, released today as v0.5.0 (MIT). No `install` one-liner, because it ships as a notarized DMG, so the body links to the latest GitHub release instead. The group blurb now says "Two tools for anyone living in Claude Code all day", and the homepage's "All N tools" count moves from 6 to 7 by itself because it derives from `TOOL_GROUPS`.
+
 ## [1.8.1] — 2026-09-10
 
 ### Added
