@@ -122,9 +122,7 @@ const itemListLd = {
 
                 {tool.install && (
                   <div class="mt-5 overflow-x-auto">
-                    <code class="block font-mono text-[13px] bg-[color:var(--bg-soft)] border border-[color:var(--rule)] rounded px-4 py-3 whitespace-pre">
-                      <span class="text-[color:var(--fg-soft)] select-none" aria-hidden="true">$ </span>{tool.install}
-                    </code>
+                    <code class="block font-mono text-[13px] bg-[color:var(--bg-soft)] border border-[color:var(--rule)] rounded px-4 py-3 whitespace-pre">{tool.install.split("\n").map((line, i) => <>{i > 0 && "\n"}<span class="text-[color:var(--fg-soft)] select-none" aria-hidden="true">$ </span>{line}</>)}</code>
                   </div>
                 )}
 

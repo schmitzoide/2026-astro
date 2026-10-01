@@ -14,7 +14,7 @@ export interface Tool {
   tagline: string;
   /** Two or three sentences. What problem it solves, and how. */
   body: string;
-  /** Shell one-liner. Omitted when there isn't a single sensible command. */
+  /** Shell one-liner, or a few lines joined with "\n" (each gets its own prompt). Omitted when there isn't a sensible command. */
   install?: string;
   /** npm package name, when published. */
   npm?: string;
@@ -86,7 +86,7 @@ export const TOOL_GROUPS: ToolGroup[] = [
     id: "also",
     title: "Also",
     blurb:
-      "Two tools for anyone living in Claude Code all day, and one that is less a developer tool than an argument about where AI should run.",
+      "Three tools for anyone living in Claude Code all day, and one that is less a developer tool than an argument about where AI should run.",
     tools: [
       {
         repo: "wims",
@@ -102,6 +102,15 @@ export const TOOL_GROUPS: ToolGroup[] = [
         name: "Smart Terminal",
         tagline: "Terminal.app with tab groups and tabs that know Claude is in them",
         body: "Five Claude Code sessions in Terminal.app means five tabs that all say `zsh`. Smart Terminal is a native macOS terminal that keeps your Terminal.app profile and adds Chrome-style tab groups: rename tabs, gather them into named, colored, collapsible groups and drag them between windows. A tab running Claude Code names itself after the session, shows whether Claude is working or waiting on you, and sends a notification when one you cannot see needs an answer. [Download the notarized DMG](https://github.com/pluginslab/smart-terminal/releases/latest) for macOS 26.",
+        license: "MIT",
+      },
+      {
+        repo: "devtools-fleet-mcp",
+        name: "devtools-fleet-mcp",
+        tagline: "Google's DevTools MCP for ten agents at once, each in its own logged-in Chrome",
+        body: "chrome-devtools-mcp is the best browser toolset an agent can have for debugging, right up until a second agent starts and gets `The browser is already running`. devtools-fleet gives every session its own isolated Chrome running those same tools unchanged, keeps it alive across reconnects, and can start it already logged in from a login you saved once by hand, fenced to that site's origins so a signed-in agent cannot be steered anywhere else. `devtools-fleet ls` lists every browser on the machine and `show` opens a live view of any of them, without disturbing the agent.",
+        install: "claude plugin marketplace add pluginslab/devtools-fleet-mcp\nclaude plugin install devtools-fleet@pluginslab-devtools-fleet",
+        npm: "devtools-fleet-mcp",
         license: "MIT",
       },
       {

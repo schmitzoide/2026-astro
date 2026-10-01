@@ -3,6 +3,20 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.3] — 2026-10-01
+
+### Added
+
+- **devtools-fleet-mcp on /tools**, in the *Also* group between Smart Terminal and wp-agentic-admin: one isolated, optionally logged-in Chrome per agent running Google's chrome-devtools-mcp tools, released today as v0.1.0 (MIT). Placed in *Also* rather than the WordPress trio, even though its README calls it the "look" step after author, validate, test: it is not WordPress-specific, and a fourth member would break the trio's story. The group blurb now says "Three tools for anyone living in Claude Code all day", and the homepage count moves from 7 to 8 by itself.
+
+### Changed
+
+- **`install` can now hold more than one line.** devtools-fleet installs as a Claude Code plugin, which takes two commands (add the marketplace, then install). The install block already rendered with `whitespace-pre`, so a `\n` showed as a second line, but without the `$ ` prompt. Each line is now split out and gets its own non-selectable prompt, so the block copies as two clean commands. Single-line entries render as before.
+
+### Fixed
+
+- **Every install block started and ended with a stray space**, inside the copyable text. The `<code>` element was written on its own lines, and with `whitespace-pre` the newline and indentation around its content collapsed to a visible space on each side. Invisible on one line, but it pushed a second line out of alignment, which is how it was found. The content now sits directly against the tags.
+
 ## [1.8.2] — 2026-09-24
 
 ### Added
