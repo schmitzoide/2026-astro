@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.4] — 2026-10-28
+
+### Changed
+- **Smart Terminal on /tools** describes the 0.9 layout: tabs in columns like Mail (groups, sessions with their git branch and diff, terminal), instead of the Chrome-style tab strip, which is now the optional layout. The tagline stays.
+- **Rebuild to pull the updated post** "Which Tab Was That?" (EN and PT) from WordPress: new screenshot, a dated update section on the columns layout, `softwareVersion` 0.9.0 in its JSON-LD, and the outdated "tmux is not detected yet" limit removed. Content is fetched at build time, so the WordPress edit alone does not reach the live site.
+
 ## [1.8.3] — 2026-10-01
 
 ### Added
