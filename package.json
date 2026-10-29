@@ -1,7 +1,7 @@
 {
   "name": "2026-astro",
   "type": "module",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "engines": {
     "node": ">=22.12.0"
   },

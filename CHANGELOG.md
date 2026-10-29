@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.6] — 2026-10-29
+
+### Changed
+- **Smart Terminal on /tools** mentions the per-tab browser from 0.10: a page Claude opens, or a link you ⌘-click, shows up beside the session that opened it.
+- **Rebuild to pull the updated post** "Which Tab Was That?" (EN and PT): a new section on the browser with its own screenshot, a line in the dated note, the table of contents, `softwareVersion` 0.10.0 in its JSON-LD, and "no network requests of its own" now that the app has a browser. WordPress content is fetched at build time, so this rebuild is what takes it live.
+
 ## [1.8.5] — 2026-10-29
 
 ### Changed

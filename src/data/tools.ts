@@ -101,7 +101,7 @@ export const TOOL_GROUPS: ToolGroup[] = [
         repo: "smart-terminal",
         name: "Smart Terminal",
         tagline: "Terminal.app with tab groups and tabs that know Claude is in them",
-        body: "Five Claude Code sessions in Terminal.app means five tabs that all say `zsh`. Smart Terminal is a native macOS terminal that keeps your Terminal.app profile and lays your tabs out like Mail: named, colored groups on the left, sessions with their git branch and diff in the middle, the terminal on the right. A tab running Claude Code names itself after the session, shows whether Claude is working or waiting on you, and sends a notification when one you cannot see needs an answer. [Download the notarized DMG](https://github.com/pluginslab/smart-terminal/releases/latest) for macOS 26.",
+        body: "Five Claude Code sessions in Terminal.app means five tabs that all say `zsh`. Smart Terminal is a native macOS terminal that keeps your Terminal.app profile and lays your tabs out like Mail: named, colored groups on the left, sessions with their git branch and diff in the middle, the terminal on the right. Each tab also gets its own browser, so a page Claude opens, or a link you ⌘-click, shows up beside the session that opened it. A tab running Claude Code names itself after the session, shows whether Claude is working or waiting on you, and sends a notification when one you cannot see needs an answer. [Download the notarized DMG](https://github.com/pluginslab/smart-terminal/releases/latest) for macOS 26.",
         license: "MIT",
       },
       {
