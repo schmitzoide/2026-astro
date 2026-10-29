@@ -3,6 +3,11 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.5] — 2026-10-29
+
+### Changed
+- **Rebuild to pull the new Smart Terminal screenshot** into "Which Tab Was That?" (EN and PT). Smart Terminal 0.9.4 runs the groups sidebar the full height of the window, as in Mail, so the picture in the post was retaken. Only the image changed in WordPress; content is fetched at build time, so it needs this rebuild to go live.
+
 ## [1.8.4] — 2026-10-28
 
 ### Changed
