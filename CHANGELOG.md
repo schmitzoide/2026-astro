@@ -3,6 +3,11 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.9] — 2026-11-03
+
+### Changed
+- **Rebuild to pull the Glossa post** "Teach Your Mac to Spell: Whisper Dictation With a Glossary" (EN and PT). WordPress content is fetched at build time, so this rebuild is what takes the two posts live.
+
 ## [1.8.8] — 2026-11-03
 
 ### Changed
