@@ -3,6 +3,11 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.11] — 2026-11-03
+
+### Changed
+- **Rebuild to pull the corrected Glossa post** (EN and PT): the example sentence is a generic one now (kubectl, nginx, Next.js, pnpm, PostgreSQL) with a matching hero image, instead of my own hostnames.
+
 ## [1.8.10] — 2026-11-03
 
 ### Fixed
