@@ -3,6 +3,11 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.8] — 2026-11-03
+
+### Changed
+- **Glossa on /tools** gets its install command now that 0.2.0 ships through Homebrew (`brew install --cask pluginslab/tap/glossa`, then `glossa-server`), and a line on music ducking. The DMG link stays, as the second route.
+
 ## [1.8.7] — 2026-11-03
 
 ### Added
