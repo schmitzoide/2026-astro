@@ -3,6 +3,11 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.7] — 2026-11-03
+
+### Added
+- **Glossa on /tools**: the new Whisper dictation app for the Mac (menu bar, takes over the dictation key, prompts Whisper with a glossary and the text before the cursor). Listed in the "Also" group with a link to the notarized DMG; the group blurb now counts it.
+
 ## [1.8.6] — 2026-10-29
 
 ### Changed
