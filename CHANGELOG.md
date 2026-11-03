@@ -3,6 +3,14 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.10] — 2026-11-03
+
+### Fixed
+- **Previous/next links stay in the post's language.** The post page picked its neighbours from every published post, so an English post could point at Portuguese ones and the other way round. Neighbours now come from the same language only, like the home page listing.
+
+### Changed
+- **Glossa on /tools**: the example sentence is a generic one now (Next.js, pnpm) instead of my own hostnames.
+
 ## [1.8.9] — 2026-11-03
 
 ### Changed

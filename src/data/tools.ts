@@ -108,7 +108,7 @@ export const TOOL_GROUPS: ToolGroup[] = [
         repo: "glossa",
         name: "Glossa",
         tagline: "Mac dictation that spells your words right",
-        body: "Say \"restart the vLLM container on megamaschine\" to Apple's dictation and you get \"VLLM\" and \"Megamachine\", every time, with no way to teach it a word. Glossa takes over the Mac's dictation key and sends your voice to Whisper instead, prompted with a glossary file and the text before your cursor, read through Accessibility, so product names, hostnames and acronyms come out exactly as you spell them. A local whisper.cpp server by default, about 0.6 s per sentence on Apple silicon, or any OpenAI-compatible transcription endpoint on your network. If music is playing it ducks while you talk. Also as a [notarized DMG](https://github.com/pluginslab/glossa/releases/latest) for macOS 14.",
+        body: "Say \"redeploy the Next.js app with pnpm\" to Apple's dictation and you get \"next JS\" and \"PNPM\", every time, with no way to teach it a word. Glossa takes over the Mac's dictation key and sends your voice to Whisper instead, prompted with a glossary file and the text before your cursor, read through Accessibility, so product names, hostnames and acronyms come out exactly as you spell them. A local whisper.cpp server by default, about 0.6 s per sentence on Apple silicon, or any OpenAI-compatible transcription endpoint on your network. If music is playing it ducks while you talk. Also as a [notarized DMG](https://github.com/pluginslab/glossa/releases/latest) for macOS 14.",
         install: "brew install --cask pluginslab/tap/glossa\nglossa-server",
         license: "MIT",
       },
