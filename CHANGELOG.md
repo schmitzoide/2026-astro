@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.12] — 2026-11-08
+
+### Changed
+- **Tools: Smart Terminal and devtools-fleet entries** describe what shipped since October: agents driving a Chromium in the tab's browser pane, commands Claude hands you to run, sessions (tmux too, local or over ssh) coming back after a restart, and devtools-fleet's switch to a real Chrome.
+- **Rebuild to pull the updated Smart Terminal post** (EN and PT): a November update section and note, `softwareVersion` 0.15.0 and today's `dateModified` in its JSON-LD.
+
 ## [1.8.11] — 2026-11-03
 
 ### Changed
