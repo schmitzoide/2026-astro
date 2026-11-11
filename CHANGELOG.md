@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.14] — 2026-11-11
+
+### Changed
+- **Tools: Smart Terminal and devtools-fleet entries** no longer mention the browser pane, which Smart Terminal 0.16.0 removed; devtools-fleet 0.4.0 always launches Chrome.
+- **Rebuild to pull the updated Smart Terminal post** (EN and PT): a v0.16 note and an "Update: the browser is gone" section, the two browser sections marked as removed, `softwareVersion` 0.16.0 and today's `dateModified` in its JSON-LD.
+
 ## [1.8.13] — 2026-11-11
 
 ### Fixed
