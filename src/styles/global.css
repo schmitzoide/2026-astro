@@ -171,6 +171,13 @@
   .prose-reader figure {
     margin: 2em 0;
   }
+  /* WordPress "resized + centred" images (e.g. phone screenshots at half size):
+     the block saves an inline width on the img and .aligncenter on the figure. */
+  .prose-reader figure.aligncenter img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .prose-reader figcaption,
   .prose-reader .wp-element-caption {
     font-family: var(--font-mono);

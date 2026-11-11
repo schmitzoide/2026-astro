@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.8.13] — 2026-11-11
+
+### Fixed
+- **Resized, centred images sit in the middle of the column.** WordPress saves a centred, resized image as `figure.aligncenter` with an inline width on the `img`, and relies on its own theme CSS to centre it. The reader had no such rule, so half-width images hugged the left edge. Added it for the iSH+ post, whose phone screenshots show at 360px.
+- **A resized image's width survives the lazy-load cleanup.** Smush writes its placeholder variables into the image's existing `style` attribute (`--smush-placeholder-…; width:360px`), and `fixLazyImages` dropped any style that started with `--smush-placeholder`, so the block's own width went with it and the screenshots rendered at full size. It now removes only the `--smush-*` declarations and keeps the rest.
+
 ## [1.8.12] — 2026-11-08
 
 ### Changed

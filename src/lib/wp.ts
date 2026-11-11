@@ -90,7 +90,16 @@ export const fixLazyImages = (html: string): string =>
           .replace(/\sdata-srcset="([^"]+)"/i, ' srcset="$1"');
       }
       next = next
-        .replace(/\sstyle="--smush-placeholder[^"]*"/i, "")
+        // Smush puts its placeholder vars in the same style attribute as the
+        // block's own (e.g. a resized image's width). Drop only the --smush-* ones.
+        .replace(/\sstyle="([^"]*)"/i, (_m, css: string) => {
+          const kept = css
+            .split(";")
+            .map((d) => d.trim())
+            .filter((d) => d && !d.startsWith("--smush-"))
+            .join(";");
+          return kept ? ` style="${kept}"` : "";
+        })
         .replace(/(\sclass="[^"]*?)\s*lazyload\s*/i, "$1")
         .replace(/\sclass="\s*"/i, "");
       return `<${tag}${next}>`;
