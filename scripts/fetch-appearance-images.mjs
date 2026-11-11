@@ -30,6 +30,10 @@ const SOURCES = {
   "woocommerce-live-design": "https://www.youtube.com/watch?v=JliqsUgtwkE",
   "wptavern-jukebox-42":
     "https://wptavern.com/podcast/42-marcel-schmitz-on-finding-work-with-codeable-and-working-with-woocommerce",
+  "wctv-ia-desconto":
+    "https://wordpress.tv/2026/10/28/a-ia-nao-e-um-desconto-e-capacidade-mesmo-preco-mais-margem-e-servicos-que-antes-nao-cabiam-no-t/",
+  "wctv-browser-agent":
+    "https://wordpress.tv/2026/10/19/the-browser-is-the-agent-running-local-autonomous-ai-in-wordpress/",
   "wctv-nova-era":
     "https://wordpress.tv/2026/05/19/a-nova-era-do-wordpress-de-developer-a-arquiteto-com-engenharia-agentica/",
   "wctv-agentic-admin": "https://wordpress.tv/2026/05/19/wp-agentic-admin/",

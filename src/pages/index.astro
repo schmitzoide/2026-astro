@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { getCollection, getEntry } from "astro:content";
 import { TOOL_GROUPS } from "../data/tools";
-import { ALL_APPEARANCES } from "../data/appearances";
+import { ALL_APPEARANCES, TALKS } from "../data/appearances";
 import { Image } from "astro:assets";
 import { SITE } from "../lib/site";
 import { decodeEntities } from "../lib/wp";
@@ -118,7 +118,19 @@ const log: LogEntry[] = [
     href: `/posts/${post.id}/`,
     external: false,
   })),
-  ...ALL_APPEARANCES.map((a) => ({
+  // Talks come from TALKS, dated by the day on stage. The Speaker entries in
+  // ALL_APPEARANCES are video uploads of some of those same talks, dated by
+  // publication, so they are left out here to avoid listing a talk twice.
+  ...TALKS.map((t) => ({
+    date: new Date(`${t.date}T12:00:00Z`),
+    kind: "appeared" as const,
+    label: t.panel ? "Panel" : "Spoke",
+    title: t.title,
+    detail: [t.event, t.withWhom].filter(Boolean).join(", ") + (t.video ? ". Video available." : ""),
+    href: t.video ?? t.url,
+    external: true,
+  })).filter((t) => t.date >= oldestPost),
+  ...ALL_APPEARANCES.filter((a) => a.role !== "Speaker").map((a) => ({
     date: new Date(`${a.date}T12:00:00Z`),
     kind: "appeared" as const,
     label: roleLabel[a.role] ?? a.role,

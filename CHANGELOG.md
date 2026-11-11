@@ -3,6 +3,15 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.9.1] — 2026-11-11
+
+### Fixed
+- **Talks were missing from the home page log.** The log took its "Spoke" entries from the "Talks on video" group, which only holds filmed sessions and dates them by when WordPress.tv published the recording. WordCamp Belgrade and the WordCamp Portugal panel were never filmed, the Galicia and Faro recordings had not been added, so none of the four appeared, and the filmed ones sat on the wrong day (WordCamp Portugal on 19 May instead of 15 and 16 May). A new `TALKS` list in `appearances.ts` holds every talk since the oldest post, dated by the session, linking to the recording when there is one and to the session page otherwise. Panels are tagged "Panel".
+- **WordPress Day Porto 2025 is WordPress Day for Ecommerce Porto 2025**, its actual name, in the appearances data.
+
+### Added
+- **Two talks on video**: WordCamp Galicia 2026 ("The Browser is the Agent", with Ivelina Dimova) and WordPress Day for AI, Faro ("A IA não é um desconto. É capacidade."), both on WordPress.tv since October. Thumbnails fetched with `scripts/fetch-appearance-images.mjs`.
+
 ## [1.9.0] — 2026-11-11
 
 ### Changed

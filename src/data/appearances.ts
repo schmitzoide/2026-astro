@@ -209,8 +209,27 @@ export const APPEARANCE_GROUPS: AppearanceGroup[] = [
     id: "talks",
     title: "Talks on video",
     blurb:
-      "Conference sessions that made it to tape. Portuguese unless noted. The 2026 WordCamp Portugal pair are the current agentic material; the 2017 one is a period piece.",
+      "Conference sessions that made it to tape. Portuguese unless noted. The 2026 sessions are the current agentic material; the 2017 one is a period piece.",
     items: [
+      {
+        date: "2026-10-28",
+        title: "A IA não é um desconto. É capacidade.",
+        venue: "WordPress Day for AI, Faro",
+        url: "https://wordpress.tv/2026/10/28/a-ia-nao-e-um-desconto-e-capacidade-mesmo-preco-mais-margem-e-servicos-que-antes-nao-cabiam-no-t/",
+        role: "Speaker",
+        note: "A year of delivering every Pluginslab project with AI: costs fell, prices didn't, and where the difference went.",
+        image: "wctv-ia-desconto",
+      },
+      {
+        date: "2026-10-19",
+        title: "The Browser is the Agent: Running Local, Autonomous AI in WordPress",
+        venue: "WordCamp Galicia 2026",
+        url: "https://wordpress.tv/2026/10/19/the-browser-is-the-agent-running-local-autonomous-ai-in-wordpress/",
+        role: "Speaker",
+        withWhom: "Ivelina Dimova",
+        note: "In English. WebGPU, WebLLM and the Abilities API, with wp-agentic-admin as the case study.",
+        image: "wctv-browser-agent",
+      },
       {
         date: "2026-05-19",
         title: "A Nova Era do WordPress: De Developer a Arquiteto com Engenharia Agêntica",
@@ -232,7 +251,7 @@ export const APPEARANCE_GROUPS: AppearanceGroup[] = [
       {
         date: "2025-11-24",
         title: "Como instalar e integrar um servidor MCP com WooCommerce e ChatGPT",
-        venue: "WordPress Day Porto 2025",
+        venue: "WordPress Day for Ecommerce Porto 2025",
         url: "https://wordpress.tv/2025/11/24/como-instalar-e-integrar-um-servidor-mcp-com-woocommerce-e-chatgpt-para-criar-um-bot-inteligente-par/",
         role: "Speaker",
         image: "wctv-mcp-woocommerce",
@@ -265,6 +284,78 @@ export const APPEARANCE_GROUPS: AppearanceGroup[] = [
         image: "wctv-lisboa-2017",
       },
     ],
+  },
+];
+
+// Talks given, dated by the day on stage. The "Talks on video" group above is
+// dated by when WordPress.tv published the recording and only covers sessions
+// that were filmed, so the home page log reads this list for its "Spoke"
+// entries instead. Add a talk here when it happens; set `video` once the
+// recording is up. Only goes back as far as the home page log does.
+export interface Talk {
+  /** ISO date of the session itself. */
+  date: string;
+  title: string;
+  event: string;
+  /** Session page on the event site. */
+  url: string;
+  /** Recording, when there is one. Preferred over `url` for linking. */
+  video?: string;
+  /** Co-presenters or panellists, already phrased for display. */
+  withWhom?: string;
+  panel?: boolean;
+}
+
+export const TALKS: Talk[] = [
+  {
+    date: "2026-10-24",
+    title: "A IA não é um desconto. É capacidade.",
+    event: "WordPress Day for AI, Faro",
+    url: "https://events.wordpress.org/faro/2026/wordpress-day-for-ai/session/a-ia-nao-e-um-desconto-e-capacidade/",
+    video: "https://wordpress.tv/2026/10/28/a-ia-nao-e-um-desconto-e-capacidade-mesmo-preco-mais-margem-e-servicos-que-antes-nao-cabiam-no-t/",
+  },
+  {
+    date: "2026-10-17",
+    title: "The Browser is the Agent: Running Local, Autonomous AI in WordPress",
+    event: "WordCamp Galicia 2026, A Coruña",
+    url: "https://galicia.wordcamp.org/2026/session/the-browser-is-the-agent-running-local-autonomous-ai-in-wordpress/",
+    withWhom: "with Ivelina Dimova",
+    video: "https://wordpress.tv/2026/10/19/the-browser-is-the-agent-running-local-autonomous-ai-in-wordpress/",
+  },
+  {
+    date: "2026-09-19",
+    title: "Code is cheap, judgment is not: the WordPress developer’s new core skill",
+    event: "WordCamp Belgrade 2026",
+    url: "https://belgrade.wordcamp.org/2026/session/code-is-cheap-judgment-is-not-the-wordpress-developers-new-core-skill/",
+  },
+  {
+    date: "2026-05-16",
+    title: "A Nova Era do WordPress: De Developer a Arquiteto com Engenharia Agêntica",
+    event: "WordCamp Portugal 2026, Porto",
+    url: "https://portugal.wordcamp.org/2026/session/a-nova-era-do-wordpress-de-developer-a-arquiteto-com-engenharia-agentica/",
+    video: "https://wordpress.tv/2026/05/19/a-nova-era-do-wordpress-de-developer-a-arquiteto-com-engenharia-agentica/",
+  },
+  {
+    date: "2026-05-15",
+    title: "Impacto da Inteligência Artificial na Comunidade WordPress",
+    event: "WordCamp Portugal 2026, Porto",
+    url: "https://portugal.wordcamp.org/2026/session/impacto-da-inteligencia-artifical-na-comunidade-wordpress/",
+    withWhom: "with Nilo Velez and Shadi Sharaf",
+    panel: true,
+  },
+  {
+    date: "2026-05-15",
+    title: "WP Agentic Admin",
+    event: "WordCamp Portugal 2026, Porto",
+    url: "https://portugal.wordcamp.org/2026/session/wp-agentic-admin/",
+    video: "https://wordpress.tv/2026/05/19/wp-agentic-admin/",
+  },
+  {
+    date: "2025-11-15",
+    title: "Como instalar e integrar um servidor MCP com WooCommerce e ChatGPT",
+    event: "WordPress Day for Ecommerce Porto 2025",
+    url: "https://events.wordpress.org/porto/2025/wordpress-day-ecommerce/",
+    video: "https://wordpress.tv/2025/11/24/como-instalar-e-integrar-um-servidor-mcp-com-woocommerce-e-chatgpt-para-criar-um-bot-inteligente-par/",
   },
 ];
 
