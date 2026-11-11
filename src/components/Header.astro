@@ -4,7 +4,7 @@ const path = Astro.url.pathname;
 ---
 
 <header
-  class="sticky top-0 z-50 backdrop-blur-md bg-[color:var(--bg)]/80 border-b border-[color:var(--rule)]"
+  class="sticky top-0 z-50 bg-[color:var(--bg)] border-b border-[color:var(--rule)]"
   role="banner"
 >
   <!-- flex-wrap, so once the nav no longer fits beside the wordmark (five items
@@ -12,12 +12,11 @@ const path = Astro.url.pathname;
   <div class="mx-auto max-w-5xl px-6 lg:px-10 min-h-14 py-1.5 sm:py-0 flex flex-wrap items-center justify-between gap-x-4">
     <a
       href="/"
-      class="font-mono text-[13px] tracking-tight hover:text-[color:var(--accent)] transition-colors py-3 -my-3"
-      aria-label={`${SITE.name}, home`}
+      class="text-[16px] font-bold tracking-tight hover:text-[color:var(--accent)] transition-colors py-3 -my-3"
     >
-      <span class="text-[color:var(--fg-soft)]" aria-hidden="true">~/</span>marcel<span class="text-[color:var(--fg-soft)]" aria-hidden="true">.schmitz</span>
+      {SITE.name}
     </a>
-    <nav class="flex flex-wrap items-center gap-x-0.5 sm:gap-x-1 font-mono text-[13px] -ml-2 sm:ml-0 w-full sm:w-auto min-w-0" aria-label="Primary">
+    <nav class="flex flex-wrap items-center gap-x-0.5 sm:gap-x-1 text-[15px] -ml-2 sm:ml-0 w-full sm:w-auto min-w-0" aria-label="Primary">
       {NAV.map((item) => {
         const active = item.href === "/" ? path === "/" : path.startsWith(item.href);
         const external = item.href.startsWith("http");
@@ -39,7 +38,7 @@ const path = Astro.url.pathname;
       <button
         id="theme-toggle"
         type="button"
-        class="ml-0.5 sm:ml-1 px-2 sm:px-2.5 py-3 -my-1 rounded font-mono text-[13px] text-[color:var(--fg-soft)] hover:text-[color:var(--fg)] transition-colors min-h-11 min-w-11 inline-flex items-center justify-center"
+        class="ml-0.5 sm:ml-1 px-2 sm:px-2.5 py-3 -my-1 rounded text-[15px] text-[color:var(--fg-soft)] hover:text-[color:var(--fg)] transition-colors min-h-11 min-w-11 inline-flex items-center justify-center"
         aria-label="Switch to dark theme"
         aria-pressed="false"
       >

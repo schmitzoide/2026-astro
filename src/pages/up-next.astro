@@ -9,8 +9,7 @@ const { data } = page;
 
 <Base title={data.title} description={data.description} seoTitle={data.seoTitle} seoDescription={data.seoDescription}>
   <article class="mx-auto max-w-3xl px-6 lg:px-10 pt-16 sm:pt-24 pb-20">
-    <p class="font-mono text-[12px] uppercase tracking-wider text-[color:var(--fg-soft)] mb-6">Up Next</p>
-    <h1 class="font-serif text-4xl sm:text-5xl tracking-tight leading-tight font-light">
+    <h1 class="font-bold text-4xl sm:text-5xl tracking-tight leading-tight">
       {data.title}
     </h1>
     <div class="prose-reader mt-10" set:html={data.contentHtml} />

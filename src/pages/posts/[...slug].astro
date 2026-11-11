@@ -112,7 +112,7 @@ const breadcrumbsLd = {
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbsLd)} />
 
   <article class="mx-auto max-w-5xl px-6 lg:px-10 pt-10 sm:pt-16" aria-labelledby="post-title">
-    <div class="flex items-center justify-between gap-4 font-mono text-[12px] text-[color:var(--fg-soft)]">
+    <div class="flex items-center justify-between gap-4 text-sm text-[color:var(--fg-soft)]">
       <a
         href="/"
         class="hover:text-[color:var(--accent)] transition-colors inline-flex items-center gap-1.5 py-2 -my-2"
@@ -136,14 +136,11 @@ const breadcrumbsLd = {
     </div>
 
     <header class="mt-10 sm:mt-14 max-w-3xl">
-      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[12px] text-[color:var(--fg-soft)] mb-6">
-        <span class="text-[color:var(--accent)]">/{data.category}</span>
-        <span aria-hidden="true">·</span>
-        <time datetime={data.publishDate.toISOString()}>{formatDateLong(data.publishDate, postLanguage)}</time>
-        <span aria-hidden="true">·</span>
+      <p class="text-[15px] text-[color:var(--fg-soft)] mb-5">
+        <time datetime={data.publishDate.toISOString()}>{formatDateLong(data.publishDate, postLanguage)}</time>,
         <span aria-label={`${minutes} minute read`}>{minutes} min read</span>
-      </div>
-      <h1 id="post-title" class="font-serif text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] tracking-[-0.02em] font-light text-balance">
+      </p>
+      <h1 id="post-title" class="font-bold text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] tracking-[-0.02em] text-balance">
         {data.title}
       </h1>
       <p class="mt-6 text-lg sm:text-xl text-[color:var(--fg-soft)] leading-relaxed">
@@ -161,18 +158,18 @@ const breadcrumbsLd = {
     >
       {prev ? (
         <a href={`/posts/${prev.id}/`} class="group block" rel="prev">
-          <p class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)]">
+          <p class="text-sm text-[color:var(--fg-soft)]">
             <span aria-hidden="true">←</span> Older
           </p>
-          <p class="mt-1 font-serif text-lg leading-snug group-hover:text-[color:var(--accent)] transition-colors">{prev.data.title}</p>
+          <p class="mt-1 font-semibold text-lg leading-snug group-hover:text-[color:var(--accent)] transition-colors">{prev.data.title}</p>
         </a>
       ) : <span />}
       {next ? (
         <a href={`/posts/${next.id}/`} class="group block sm:text-right" rel="next">
-          <p class="font-mono text-[11px] uppercase tracking-wider text-[color:var(--fg-soft)]">
+          <p class="text-sm text-[color:var(--fg-soft)]">
             Newer <span aria-hidden="true">→</span>
           </p>
-          <p class="mt-1 font-serif text-lg leading-snug group-hover:text-[color:var(--accent)] transition-colors">{next.data.title}</p>
+          <p class="mt-1 font-semibold text-lg leading-snug group-hover:text-[color:var(--accent)] transition-colors">{next.data.title}</p>
         </a>
       ) : <span />}
     </nav>

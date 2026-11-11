@@ -12,18 +12,13 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Albert Sans",
-      weights: [300, 400, 500, 600, 700],
+      name: "Hanken Grotesk",
+      weights: [400, 500, 600, 700],
       cssVariable: "--font-sans",
     },
     {
       provider: fontProviders.google(),
-      name: "Fraunces",
-      weights: ["300 600"],
-      cssVariable: "--font-serif",
-    },
-    {
-      provider: fontProviders.google(),
+      // Code only: <code>, <pre> and install commands. Never chrome or labels.
       name: "JetBrains Mono",
       weights: [400, 500],
       cssVariable: "--font-mono",

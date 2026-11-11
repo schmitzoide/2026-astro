@@ -3,6 +3,19 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.9.0] — 2026-11-11
+
+### Changed
+- **New design: the Logbook.** The site looked like an untouched Claude default: cream paper with a terracotta accent, Fraunces with one italic word, JetBrains Mono for every date, label and nav item, tracked-uppercase eyebrows over each section, and 19 middle-dot separators. Picked from four sketched directions, the redesign drops all of it.
+- **One typeface.** Hanken Grotesk replaces Albert Sans, Fraunces and the monospace chrome. JetBrains Mono stays only where text is code (`code`, `pre`, install commands). `--font-serif` is now an alias of the sans, so prose headings follow.
+- **Palette.** White and cool ink, with a muted green accent; dark mode is a blue-black. Two entry colours (green for writing, blue for appearances) carry meaning on the home page.
+- **Home page is a log.** A sticky intro column (photo, short bio, Now, Next on stage, Open source, Contact) beside one dated stream of posts and appearances, grouped by year and tagged Wrote, Spoke, Guest or Co-host. Appearances go back only as far as the oldest post. Replaces the hero, the writing list and the three-box footer row.
+- **Header, footer and inner pages.** The `~/marcel.schmitz` wordmark is now the plain name; the header lost its backdrop blur. Page eyebrows (About, Up Next, Tools, Appearances) are gone, middle dots became commas, and the post meta line reads "November 11, 2026, 10 min read" without the `/category` tag.
+
+### Fixed
+- **wims install line was incomplete.** `npm install -g @pluginslab/wims` only installs `wims-tui`; the `wims` command that drops your shell into the session's folder (which the entry promises) needs the shell shim from the README's Install section. The install block now includes it. The other eight tools were checked against their READMEs, npm and licences and match.
+- **Up next.** The WordPress Up Next page still listed Belgrade, Galicia and Faro as upcoming. They moved to "Earlier this year" in past tense, and AI Show & Tell #4 (Porto, 25 November, attending) is the next entry. The home page label is "Up next" instead of "Next on stage", since not every entry is a talk, and the event name and date are entity-decoded so "Show &amp; Tell" no longer renders as `&amp;amp;`.
+
 ## [1.8.14] — 2026-11-11
 
 ### Changed

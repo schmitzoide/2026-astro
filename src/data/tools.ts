@@ -93,7 +93,10 @@ export const TOOL_GROUPS: ToolGroup[] = [
         name: "wims",
         tagline: "Find and resume any Claude Code session, from any folder",
         body: "`claude --resume` only lists sessions for the directory you happen to be standing in, so a good session from three days and forty folders ago is effectively lost. wims lists every session on the machine, lets you search and preview them, and drops your shell into the right folder with the conversation resumed. Not WordPress-specific, and the one I reach for most.",
-        install: "npm install -g @pluginslab/wims",
+        // The package installs `wims-tui`. The `wims` command, which moves your
+        // shell into the session's folder, needs the shell shim (README, Install).
+        install:
+          "npm install -g @pluginslab/wims\nmkdir -p ~/.config/wims\nwims-tui --print-shim > ~/.config/wims/wims.sh\necho '[ -f ~/.config/wims/wims.sh ] && . ~/.config/wims/wims.sh' >> ~/.zshrc",
         npm: "@pluginslab/wims",
         license: "MIT",
       },

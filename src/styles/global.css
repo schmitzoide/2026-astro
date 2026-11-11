@@ -3,12 +3,17 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-ink: #0c314b;
-  --color-ink-soft: #345168;
-  --color-paper: #fbfaf7;
-  --color-paper-soft: #f3f1ec;
-  --color-rule: #e6e1d6;
-  --color-accent: #c2410c;
+  /* Logbook palette: white, cool ink, and one muted colour per kind of log
+     entry (wrote, appeared). No cream, no terracotta. */
+  --color-ink: #17202a;
+  --color-ink-soft: #5a6573;
+  --color-paper: #ffffff;
+  --color-paper-soft: #f4f6f8;
+  --color-rule: #e3e7ec;
+  --color-accent: #2f6b4e;
+  /* One family for everything. --font-serif is kept as an alias so prose
+     headings and any leftover utility resolve to Hanken Grotesk. */
+  --font-serif: var(--font-sans);
 }
 
 @layer base {
@@ -20,23 +25,30 @@
     --fg-soft: var(--color-ink-soft);
     --rule: var(--color-rule);
     --accent: var(--color-accent);
+    --wrote: #2f6b4e;
+    --wrote-bg: #e6f1eb;
+    --appeared: #2a55a8;
+    --appeared-bg: #e7edf8;
   }
 
   :root.dark {
     color-scheme: dark;
-    --bg: #0d0f12;
-    --bg-soft: #15181d;
-    --fg: #ece7dc;
-    --fg-soft: #b3ad9f;
-    --rule: #2a2d33;
-    --accent: #f59e6b;
+    --bg: #12161b;
+    --bg-soft: #1a1f26;
+    --fg: #e6eaef;
+    --fg-soft: #9ca6b3;
+    --rule: #252c35;
+    --accent: #8ccfaa;
+    --wrote: #8ccfaa;
+    --wrote-bg: #1b2e24;
+    --appeared: #9cb8f2;
+    --appeared-bg: #1c2640;
   }
 
   html {
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -102,16 +114,16 @@
   .prose-reader > * + * { margin-top: 1.25em; }
   .prose-reader h2 {
     font-family: var(--font-serif);
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     line-height: 1.2;
-    font-weight: 500;
+    font-weight: 700;
     margin-top: 2.5em;
     letter-spacing: -0.01em;
   }
   .prose-reader h3 {
     font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 500;
+    font-size: 1.25rem;
+    font-weight: 700;
     margin-top: 2em;
   }
   .prose-reader p { color: var(--fg); }
@@ -180,8 +192,7 @@
   }
   .prose-reader figcaption,
   .prose-reader .wp-element-caption {
-    font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 14px;
     color: var(--fg-soft);
     text-align: center;
     margin-top: 0.75em;
