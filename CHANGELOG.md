@@ -3,6 +3,12 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.9.2] — 2026-11-12
+
+### Changed
+- **Tools: Glossa entry** mentions the fallback server that 0.3.0 added (a GPU box as the server, the local whisper-server when the laptop cannot reach it).
+- **Rebuild to pull the updated Glossa post** (EN and PT): one line on the two-server setup in "What Glossa does", `softwareVersion` 0.3.0 and today's `dateModified` in its JSON-LD.
+
 ## [1.9.1] — 2026-11-11
 
 ### Fixed
