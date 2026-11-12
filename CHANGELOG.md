@@ -3,6 +3,11 @@
 All notable changes to the marcelschmitz.com Astro frontend.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · versions follow [SemVer](https://semver.org/).
 
+## [1.9.3] — 2026-11-12
+
+### Changed
+- **New portrait on the home page.** A studio photo against a blue wall replaces the old one, shown square at the full width of the intro column (160 to 192px on phones), cropped to start just above the head. The intro column is no longer sticky: with the larger photo it is taller than the viewport, so a sticky column would hide its Contact and Open source lines until the end of the page. The old `marcel.jpg` was only used here and is removed.
+
 ## [1.9.2] — 2026-11-12
 
 ### Changed

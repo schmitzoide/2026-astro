@@ -6,7 +6,7 @@ import { ALL_APPEARANCES, TALKS } from "../data/appearances";
 import { Image } from "astro:assets";
 import { SITE } from "../lib/site";
 import { decodeEntities } from "../lib/wp";
-import marcelPhoto from "../assets/marcel.jpg";
+import marcelPhoto from "../assets/marcel-portrait.jpg";
 
 // Homepage chrome is English-only (scope decision), so the writing index
 // only shows EN posts. Each PT translation surfaces via the in-article
@@ -160,16 +160,16 @@ const link =
   <script type="application/ld+json" set:html={JSON.stringify(blogLd)} />
 
   <div class="mx-auto max-w-5xl px-6 lg:px-10 pt-12 sm:pt-16 pb-8 grid gap-12 lg:gap-16 lg:grid-cols-[280px_minmax(0,1fr)]">
-    <aside class="lg:sticky lg:top-24 lg:self-start" aria-labelledby="hero-name">
+    <aside aria-labelledby="hero-name">
       <Image
         src={marcelPhoto}
-        alt="Marcel Schmitz"
-        widths={[96, 192]}
-        sizes="96px"
+        alt="Marcel Schmitz, arms crossed, in a striped shirt against a blue wall"
+        widths={[192, 280, 384, 560]}
+        sizes="(min-width: 1024px) 280px, (min-width: 640px) 192px, 160px"
         loading="eager"
         fetchpriority="high"
         decoding="async"
-        class="w-24 h-24 rounded-full object-cover"
+        class="w-40 sm:w-48 lg:w-full aspect-square h-auto rounded-md object-cover object-[50%_18%]"
       />
       <h1 id="hero-name" class="mt-5 text-[28px] leading-tight font-bold tracking-tight">Marcel Schmitz</h1>
       <p class="mt-1 text-[17px] font-medium">Software engineer in Porto</p>
